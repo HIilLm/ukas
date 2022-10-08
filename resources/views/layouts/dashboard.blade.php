@@ -25,7 +25,7 @@
 
     <!-- Theme Styles -->
     <link href="{{ asset('/assets/css/main.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/css/dark-theme.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('/assets/css/dark-theme.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('/assets/css/custom.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ asset('/images/favicon.png') }}" />
 

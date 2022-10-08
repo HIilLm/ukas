@@ -17,9 +17,41 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+Route::get('/login', function () {
+    return view('dashboards.login');
+});
+
 Route::get('/',function()
 {
-    return view('dashboards.opreason.index_opreason',[
-        'page' => 'oke'
+    return view('dashboards.index',[
+        'page' => 'Dashboard'
+    ]);
+});
+
+Route::get('/admin/kelas',function()
+{
+    return view('dashboards.kelas.index_kelas',[
+        'page' => 'Kelas'
+    ]);
+});
+
+Route::get('/bendahara',function()
+{
+    return view('dashboards.indexb',[
+        'page' => 'Dashboard'
+    ]);
+});
+
+Route::get('/admin',function()
+{
+    return view('dashboards.indexa',[
+        'page' => 'Dashboard'
+    ]);
+});
+
+Route::get('/uangkas',function()
+{
+    return view('dashboards.uang_kas.index_uang',[
+        'page' => 'Uang Kas'
     ]);
 });

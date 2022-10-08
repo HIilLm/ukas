@@ -10,15 +10,18 @@
                 </li>
             </ul>
         </div>
-        {{-- <div class="headerNav">
+        <div class="headerNav">
             <div class="ms-5">
                 <a class="dark" href="#" onclick="out()">
-                    {{ __('Logout') }} <i data-feather="log-out"></i>
+                    {{ __('Logout') }}
+                    <i data-feather="log-out"></i>
                 </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                <form id="logout-form"
+                {{-- action="{{ route('logout') }}" --}}
+                 method="POST" class="d-none">
                     @csrf
                 </form>
             </div>
-        </div> --}}
+        </div>
     </nav>
 </div>
