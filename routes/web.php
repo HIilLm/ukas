@@ -35,10 +35,38 @@ Route::get('/admin/kelas',function()
     ]);
 });
 
+Route::get('/bendahara/kelas',function()
+{
+    return view('dashboards.kelas.view_kelas',[
+        'page' => 'Kelas Bendahara'
+    ]);
+});
+
+Route::get('/pengeluaran',function()
+{
+    return view('dashboards.pengeluaran',[
+        'page' => 'Pengeluaran'
+    ]);
+});
+
 Route::get('/bendahara',function()
 {
     return view('dashboards.indexb',[
         'page' => 'Dashboard'
+    ]);
+});
+
+Route::get('/detail/kelas',function()
+{
+    return view('dashboards.kelas.view_kelas',[
+        'page' => 'Kelas'
+    ]);
+});
+
+Route::get('/detail/bulan',function()
+{
+    return view('dashboards.uang_kas.view_uang',[
+        'page' => 'Uang Kas'
     ]);
 });
 

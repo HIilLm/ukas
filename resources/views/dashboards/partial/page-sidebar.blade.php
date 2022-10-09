@@ -3,8 +3,15 @@
         <li class="{{ $page === 'Dashboard' ? 'active-page' : '' }}">
             <a href="/"><i data-feather="airplay"></i>Dashboard</a>
         </li>
+
+        {{-- BENDAHARA PAGE?? --}}
         <li class="{{ $page === 'Uang Kas' ? 'active-page' : '' }}">
             <a href="/uangkas"><i data-feather="dollar-sign"></i>Uang Kas</a>
+        </li>
+        {{-- BENDAHARA PAGE?? --}}
+
+        <li class="{{ $page === 'Pengeluaran' ? 'active-page' : '' }}">
+            <a href="/pengeluaran"><i data-feather="credit-card"></i>Pengeluaran</a>
         </li>
 
         {{-- ADMIN PAGES --}}
@@ -19,5 +26,16 @@
             </ul>
         </li>
         {{-- ADMIN PAGES --}}
+
+        {{-- BENDAHARA PAGES --}}
+        <li
+            class="{{ $page === 'Kelas Bendahara' ? 'active-page' : '' }} ">
+            <a href="#"><i data-feather="briefcase"></i>Bendahara<i class="fas fa-chevron-right dropdown-icon"></i></a>
+            <ul>
+                <li><a href="/bendahara/kelas" class="{{ $page === 'Kelas Bendahara' ? 'active' : '' }}"><i
+                            class="far fa-square"></i>Kelas</a></li>
+            </ul>
+        </li>
+        {{-- BENDAHARA PAGES --}}
     </ul>
 </div>

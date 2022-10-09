@@ -6,8 +6,8 @@
             <div class="row">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Detail Kelas 12 RPL 1</h5>
-                        <a href="" class="btn btn-primary mb-3">Tambah Siswa</a> {{-- Berupa modal --}}
+                        <h5 class="card-title">Pengeluaran Kelas 12 RPL 1</h5>
+                        <a href="" class="btn btn-primary mb-3">Tambah Pengeluaran</a> {{-- Berupa modal --}}
                         <table id="logo-table" class="display"
                             style="table-layout:fixed;
                             width:100%;">
@@ -15,8 +15,9 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>NISN</th>
-                                    <th>Bendahara</th> {{-- Admin Akses --}}
+                                    <th>Keterangan</th>
+                                    <th>Tanggal Pengeluaran</th>
+                                    <th>Jumlah Pengeluaran</th>
                                     <th>option</th>
                                 </tr>
                             </thead>
@@ -28,12 +29,12 @@
                                     <td>
                                         Elang Pandi
                                     </td>
-                                    <td>0009123321</td>
-                                    <td> {{-- Admin Akses --}}
-                                        <div class="form-check form-switch">
-                                            <label class="form-check-label" for="flexSwitchCheckDefault">Bendahara</label>
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                        </div>
+                                    <td>Dekorasi Kelas</td>
+                                    <td>
+                                        {{ date('D - M / Y') }}
+                                    </td>
+                                    <td>
+                                        Rp. 50,000
                                     </td>
                                     <td style="">
                                         <div class="dropdown dropright">
@@ -63,8 +64,9 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Nisn</th>   
-                                    <th>Bendahara</th> {{-- Admin Akses --}}
+                                    <th>Keterangan</th>
+                                    <th>Tanggal Pengeluaran</th>
+                                    <th>Jumlah Pengeluaran</th>
                                     <th>option</th>
                                 </tr>
                             </tfoot>

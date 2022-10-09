@@ -33,7 +33,7 @@
                                                 <i class="fas fa-ellipsis-v"></i>
                                             </button>
                                             <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
-                                                <li><a class="dropdown-item text-dark">View</a>
+                                                <li><a href="/detail/kelas" class="dropdown-item text-dark">View</a> {{-- hrefnya perkelas  /detail/kelas   contoh = /detail/12RPL1--}}
                                                 <li><a class="dropdown-item text-dark">Edit</a>
                                                 </li>
                                                     <li>
