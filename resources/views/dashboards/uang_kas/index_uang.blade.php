@@ -41,7 +41,7 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="tahun" class="form-label">Tahun</label>
-                                    <input type="number" min="{{ date('Y') }}" name="tahun"
+                                    <input type="number" min="{{ date('Y') -2 }}"name="tahun"
                                         class="form-control @error('tahun') is-invalid @enderror" id="tahun"
                                         value="{{ old('tahun') }}">
                                     @error('tahun')
