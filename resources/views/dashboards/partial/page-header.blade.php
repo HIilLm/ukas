@@ -3,11 +3,12 @@
         <div class="" id="navbarNav">
             <ul class="navbar-nav" id="leftNav">
                 <li class="nav-item">
-                    <a class="nav-link" id="sidebar-toggle" href="#"><i data-feather="arrow-left"></i></a>
+                    <img src="{{ asset('/images.png') }}" style="height: 40px" alt="">
+                    {{-- <a class="nav-link" id="sidebar-toggle" href="#"><i data-feather="arrow-left"></i></a> --}}
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
-                </li>
+                </li> --}}
             </ul>
         </div>
         <div class="headerNav">
