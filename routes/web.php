@@ -37,7 +37,7 @@ Route::get('/admin/kelas',function()
 
 Route::get('/bendahara/kelas',function()
 {
-    return view('dashboards.kelas.view_kelas',[
+    return view('dashboards.kelas.indexb_kelas',[
         'page' => 'Kelas Bendahara'
     ]);
 });
@@ -81,5 +81,12 @@ Route::get('/uangkas',function()
 {
     return view('dashboards.uang_kas.index_uang',[
         'page' => 'Uang Kas'
+    ]);
+});
+
+Route::get('/laporan',function()
+{
+    return view('dashboards.laporan',[
+        'page' => 'Laporan'
     ]);
 });

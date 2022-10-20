@@ -51,13 +51,14 @@
                                     <th>Minggu ke 2</th>
                                     <th>Minggu ke 3</th>
                                     <th>Minggu ke 4</th>
+                                    <th>Minggu ke 5</th>
                                     {{-- <th>option</th> --}}
                                 </tr>
                             </thead>
                             <tbody id="images">
                                 <tr>
                                     <td>
-                                        1
+                                        27
                                     </td>
                                     <td>
                                         Elang Pandi
@@ -74,6 +75,8 @@
                                         <-- </td>
                                     <td>
                                         <-- </td>
+                                    <td>
+                                        <-- </td>
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -84,6 +87,7 @@
                                     <th>Minggu ke 2</th>
                                     <th>Minggu ke 3</th>
                                     <th>Minggu ke 4</th>
+                                    <th>Minggu ke 5</th>
                                     {{-- <th>option</th> --}}
                                 </tr>
                             </tfoot>

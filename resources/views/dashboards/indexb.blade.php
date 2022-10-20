@@ -7,7 +7,7 @@
                 <div class="col-md-6 col-xl-3">
                     <div class="card stat-widget">
                         <div class="card-body">
-                            <h5 class="card-title"><i data-feather="user"></i> Siswa 12 PSPT 1</h5>
+                            <h5 class="card-title"><i data-feather="users"></i> Siswa 12 PSPT 1</h5>
                             <p>Jumlah Siswa</p>
                             <h2>36 ORANG</h2>
                         </div>

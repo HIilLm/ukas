@@ -14,6 +14,10 @@
             <a href="/pengeluaran"><i data-feather="credit-card"></i>Pengeluaran</a>
         </li>
 
+        <li class="{{ $page === 'Laporan' ? 'active-page' : '' }}">
+            <a href="/laporan"><i data-feather="file"></i>Laporan</a>
+        </li>
+
         {{-- ADMIN PAGES --}}
         <li
             class="{{ $page === 'Setting' ? 'active-page' : '' }} {{ $page === 'Kelas' ? 'active-page' : '' }} {{ $page === 'categories' ? 'active-page' : '' }} {{ $page === 'Page' ? 'active-page' : '' }}">
