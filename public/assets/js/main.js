@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    
+
     "use strict";
     const submenu_animation_speed = 200;
 
@@ -9,14 +9,14 @@ $(document).ready(function() {
 
         var select_sub_menus = $('.accordion-menu li:not(.open) ul'),
             active_page_sub_menu_link = $('.accordion-menu li.active-page > a');
-        
+
         // Hide all sub-menus
         select_sub_menus.hide();
 
         const container = document.querySelector('.page-sidebar');
         const ps = new PerfectScrollbar(container);
 
-        
+
         // Accordion
         $('.accordion-menu li a').on('click', function(e) {
             var sub_menu = $(this).next('ul'),
@@ -37,9 +37,9 @@ $(document).ready(function() {
                     active_list_element.removeClass('open');
                     ps.update();
                 };
-            
+
             if(sub_menu.length) {
-                
+
                 if(!parent_list_el.hasClass('open')) {
                     if(active_list_element.length) {
                         hide_active_menu();
@@ -48,12 +48,12 @@ $(document).ready(function() {
                 } else {
                     hide_sub_menu();
                 };
-                
+
                 return false;
-                
+
             };
         });
-        
+
         if($('.active-page > ul').length) {
             active_page_sub_menu_link.click();
         };
@@ -68,8 +68,8 @@ $(document).ready(function() {
     $('#sidebar-toggle').on('click', function() {
         toggleSidebar();
     });
-    
-    (function(){ 
+
+    (function(){
         feather.replace()
     })();
 

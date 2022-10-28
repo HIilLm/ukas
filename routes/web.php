@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KelasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,19 +29,19 @@ Route::get('/',function()
     ]);
 });
 
-Route::get('/admin/kelas',function()
-{
-    return view('dashboards.kelas.index_kelas',[
-        'page' => 'Kelas'
-    ]);
-});
+// Route::get('/admin/kelas',function()
+// {
+//     return view('dashboards.kelas.index_kelas',[
+//         'page' => 'Kelas'
+//     ]);
+// });
 
-Route::get('/bendahara/kelas',function()
-{
-    return view('dashboards.kelas.indexb_kelas',[
-        'page' => 'Kelas Bendahara'
-    ]);
-});
+// Route::get('/bendahara/kelas',function()
+// {
+//     return view('dashboards.kelas.indexb_kelas',[
+//         'page' => 'Kelas Bendahara'
+//     ]);
+// });
 
 Route::get('/pengeluaran',function()
 {
@@ -90,3 +91,6 @@ Route::get('/laporan',function()
         'page' => 'Laporan'
     ]);
 });
+
+Route::resource('/kelas', KelasController::class);
+Route::put('/kelas/perbarui/{id}', [KelasController::class, "perbarui"]);

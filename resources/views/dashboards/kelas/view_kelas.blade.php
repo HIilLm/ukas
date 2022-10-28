@@ -154,6 +154,7 @@
                                 </tr>
                             </thead>
                             <tbody id="images">
+                                @foreach ($siswa as $item)
                                 <tr>
                                     <td>
                                         27
@@ -192,6 +193,7 @@
                                         </div>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>

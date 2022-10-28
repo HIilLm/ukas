@@ -23,10 +23,8 @@
             class="{{ $page === 'Setting' ? 'active-page' : '' }} {{ $page === 'Kelas' ? 'active-page' : '' }} {{ $page === 'categories' ? 'active-page' : '' }} {{ $page === 'Page' ? 'active-page' : '' }}">
             <a href="#"><i data-feather="settings"></i>Admin<i class="fas fa-chevron-right dropdown-icon"></i></a>
             <ul>
-                <li><a href="/admin/kelas" class="{{ $page === 'Kelas' ? 'active' : '' }}"><i
+                <li><a href="/kelas" class="{{ $page === 'Kelas' ? 'active' : '' }}"><i
                             class="far fa-square"></i>Kelas</a></li>
-                {{-- <li><a href="/admin/categories" class="{{ $page === 'categories' ? 'active' : '' }}"><i
-                            class="far fa-square"></i>Categories</a></li> --}}
             </ul>
         </li>
         {{-- ADMIN PAGES --}}
