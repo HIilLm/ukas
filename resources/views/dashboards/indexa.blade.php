@@ -117,7 +117,7 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="admin" class="form-label">New Password</label>
+                                    <label for="admin" class="form-label">Password Baru</label>
                                     <input class="form-control @error('password') is-invalid @enderror" name="password"
                                         type="password" id="admin">
                                     @error('password')
