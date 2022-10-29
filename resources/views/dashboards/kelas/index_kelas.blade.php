@@ -10,12 +10,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST">
+                    <form action="{{ route('kelas.store') }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label for="kelas" class="form-label">Nama Kelas</label>
-                            <input type="text" required name="kelas" class="form-control"
-                                @error('kelas') is-invalid @enderror" id="kelas"
+                            <label for="create_kelas" class="form-label">Nama Kelas</label>
+                            <input type="text" required name="nama_kelas" class="form-control"
+                                @error('kelas') is-invalid @enderror" id="create_kelas"
                                 value="{{ old('kelas') }}">
                             @error('kelas')
                                 <div class="invalid-feedback">
@@ -44,12 +44,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST">
+                    <form method="POST" id="update">
+                        @method("PUT")
                         @csrf
                         <div class="mb-3">
-                            <label for="kelas" class="form-label">Nama Kelas</label>
-                            <input type="text" required name="kelas" class="form-control"
-                                @error('kelas') is-invalid @enderror" id="kelas" value="12 RPL 1"
+                            <label for="edit_kelas" class="form-label">Nama Kelas</label>
+                            <input type="text" required name="nama_kelas" class="form-control"
+                                @error('kelas') is-invalid @enderror" id="edit_kelas"
                                 value="{{ old('kelas') }}">
                             @error('kelas')
                                 <div class="invalid-feedback">
@@ -88,13 +89,10 @@
                                 </tr>
                             </thead>
                             <tbody id="images">
+                                @foreach ($kelas as $item)
                                 <tr>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        12 RPL 1
-                                    </td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->nama_kelas }}</td>
                                     <td style="">
                                         <div class="dropdown dropright">
                                             <button class="btn btn-secondary" type="button" id="dropdownMenuButton"
@@ -102,10 +100,11 @@
                                                 <i class="fas fa-ellipsis-v"></i>
                                             </button>
                                             <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
-                                                <li><a href="/detail/kelas" class="dropdown-item text-dark">View</a>
+                                                <li><a href="{{ route("kelas.show", ['kela' => $item->id]) }}" class="dropdown-item text-dark">View</a>
                                                     {{-- hrefnya perkelas  /detail/kelas   contoh = /detail/12RPL1 --}}
-                                                <li><a class="dropdown-item text-dark" data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModalCenter1">Edit</a>
+                                                <li>
+                                                    <a class="dropdown-item text-dark" data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModalCenter1" onclick="sendData([{{ $item->id }}, '{{ $item->nama_kelas }}'])">Edit</a>
                                                 </li>
                                                 <li>
                                                     {{-- <form id="form-delete{{ $p->id }}"
@@ -121,6 +120,7 @@
                                         </div>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -137,21 +137,11 @@
     </div>
 @endsection
 @section('js')
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
     <script>
-        $(document).ready(function() {
-            var id;
-            $('.editable').each(function() {
-                id = $(this).attr('id');
-                if (id != '') {
-                    $('#' + id).summernote({
-                        height: 120,
-                    });
-                }
-            })
-        });
-
-        var table = $('#logo-table').DataTable({});
+        var table = $('#logo-table').DataTable();
+        function sendData(data){
+            $("#update").attr("action", "/kelas/perbarui/" + data[0]);
+            $("#edit_kelas").attr("value", data[1]);
+        }
     </script>
 @endsection
