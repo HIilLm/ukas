@@ -55,6 +55,7 @@ class KelasController extends Controller
     {
         return view("dashboards.kelas.view_kelas", [
             "siswa" => Kelas::find($id)->user,
+            "id_kelas" => $id,
             "page" => "kelas"
         ]);
         // dd($id);
@@ -66,10 +67,6 @@ class KelasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-
-    }
 
     public function perbarui(Request $request,$id)
     {
