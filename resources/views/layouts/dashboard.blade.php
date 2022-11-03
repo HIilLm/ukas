@@ -9,9 +9,22 @@
     <meta name="keywords" content="admin,dashboard">
     <meta name="author" content="stacks">
     <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <style>
+        .imgpno:hover {
+            background-color: white !important;
+        }
 
+        .imgpno {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+    </style>
     <!-- Title -->
     <title>{{ $page }}</title>
+
+    {{-- Icon Image for Web Icon --}}
+    <link rel="shortcut icon" href="{{ asset('smkn1.ico') }}">
+    {{-- Icon Image for Web Icon --}}
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,800&display=swap" rel="stylesheet">
@@ -32,11 +45,11 @@
     {{-- Plugins stuff --}}
     <script src="{{ asset('/assets/plugins/jquery/jquery-3.4.1.min.js') }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.2/viewer.min.css"
-        integrity="sha512-r+5gXtPk5M2lBWiI+/ITUncUNNO15gvjjVNVadv9qSd3/dsFZdpYuVu4O2yELRwSZcxlsPKOrMaC7Ug3+rbOXw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    integrity="sha512-r+5gXtPk5M2lBWiI+/ITUncUNNO15gvjjVNVadv9qSd3/dsFZdpYuVu4O2yELRwSZcxlsPKOrMaC7Ug3+rbOXw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.2/viewer.js"
-        integrity="sha512-taR40V17AK2+3RjqzCYkczb0/hTHuQCid0kBs0I2g6DqkFjkTcAIpsa+4PzGuWcRica2AOZQmz4pNPj4InFR8A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    integrity="sha512-taR40V17AK2+3RjqzCYkczb0/hTHuQCid0kBs0I2g6DqkFjkTcAIpsa+4PzGuWcRica2AOZQmz4pNPj4InFR8A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
@@ -45,11 +58,11 @@
 </head>
 
 <body>
-    {{-- <div class='loader'>
+    <div class='loader'>
         <div class='spinner-grow text-primary' role='status'>
             <span class='sr-only'>Loading...</span>
         </div>
-    </div> --}}
+    </div>
 
     <div class="page-container">
         {{-- PAGE HEADER --}}
