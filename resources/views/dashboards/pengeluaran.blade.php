@@ -138,7 +138,7 @@
                                                 <i class="fas fa-ellipsis-v"></i>
                                             </button>
                                             <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
-                                                <li><a class="dropdown-item text-dark" data-bs-toggle="modal"
+                                                <li><a class="dropdown-item text-dark" style="cursor: pointer" data-bs-toggle="modal"
                                                         data-bs-target="#exampleModal2">Edit</a> {{-- Berupa Modal --}}
                                                 </li>
                                                 <li>
@@ -147,7 +147,7 @@
                                                             method="post" style="display: none">
                                                             @csrf
                                                         </form> --}}
-                                                    <a class="dropdown-item text-dark" {{-- onclick="what({{ $p->id }})" --}}>
+                                                    <a class="dropdown-item text-dark" style="cursor: pointer" {{-- onclick="what({{ $p->id }})" --}}>
                                                         Delete
                                                     </a>
                                                 </li>

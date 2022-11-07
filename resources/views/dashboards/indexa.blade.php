@@ -4,7 +4,7 @@
     <div class="page-content">
         <div class="main-wrapper">
             <div class="row">
-                <div class="col-md-6 col-xl-3">
+                {{-- <div class="col-md-6 col-xl-3">
                     <div class="card stat-widget">
                         <div class="card-body">
                             <h5 class="card-title"><i data-feather="book"></i> Kelas</h5>
@@ -13,87 +13,31 @@
                             <h2>15 KELAS</h2>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-xl-3">
-                    <div class="card stat-widget">
-                        <div class="card-body">
-                            <h5 class="card-title"><i data-feather="users"></i> Siswa</h5>
-                            <p>Jumlah Siswa</p>
-                            <h2>3000 ORANG</h2>
-                        </div>
-                    </div>
-                </div>
-                {{--
-                <div class="col-md-6 col-xl-3">
-                    <div class="card stat-widget">
-                        <div class="card-body">
-                            <h5 class="card-title"><i data-feather="dollar-sign"></i> Uang Kas</h5>
-                            <p>Jumlah Uang Kas</p>
-                            <br>
-                            <h2>RP. 900,000</h2>
-                        </div>
-                    </div>
                 </div> --}}
-                {{-- <div class="col-md-6 col-xl-3">
-      <div class="card stat-widget">
-          <div class="card-body">
-              <h5 class="card-title">Orders</h5>
-                <h2>87</h2>
-                <p>Orders in waitlist</p>
-                <div class="progress">
-                  <div class="progress-bar bg-primary progress-bar-striped" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="col-md-6 col-xl-3">
+                    <div class="card stat-widget">
+                        <div class="card-body">
+                            <h5 class="card-title"><i data-feather="book"></i> Kelas</h5>
+                            <p>Jumlah Kelas</p>
+                            <br>
+                            <h2>20 KELAS</h2>
+                        </div>
+                    </div>
                 </div>
-          </div>
-      </div>
-    </div> --}}
+                <div class="col-md-6 col-xl-3">
+                    <div class="card stat-widget">
+                        <div class="card-body">
+                            <h5 class="card-title"><i data-feather="users"></i> Kelas</h5>
+                            <p>Jumlah Siswa</p>
+                            <br>
+                            <h2>200 ORANG</h2>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="card">
-                        {{-- <div class="row">
-                            <div class="col-md-6 col-xl-3">
-                                <div class="card stat-widget">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><i data-feather="user"></i> Siswa Kelas 12 RPL 1</h5>
-                                        <p>Jumlah Siswa :</p>
-                                        <br>
-                                        <h2>36 ORANG</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-xl-3">
-                                <div class="card stat-widget">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><i data-feather="dollar-sign"></i> Pengeluaran</h5>
-                                        <p>Jumlah Pengeluaran</p>
-                                        <br>
-                                        <h2>RP. 247</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-xl-3">
-                                <div class="card stat-widget">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><i data-feather="dollar-sign"></i> Uang kas</h5>
-                                        <p>Jumlah Uang Kas</p>
-                                        <br>
-                                        <h2>RP. 7.400</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-xl-3">
-                  <div class="card stat-widget">
-                      <div class="card-body">
-                          <h5 class="card-title">Orders</h5>
-                            <h2>87</h2>
-                            <p>Orders in waitlist</p>
-                            <div class="progress">
-                              <div class="progress-bar bg-primary progress-bar-striped" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                      </div>
-                  </div>
-                </div>
-                        </div> --}}
                         <div class="card-body">
                             <form action="/admin" method="POST"id="admin-pass">
                                 @method('Put')
@@ -117,7 +61,7 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="admin" class="form-label">New Password</label>
+                                    <label for="admin" class="form-label">Password Baru</label>
                                     <input class="form-control @error('password') is-invalid @enderror" name="password"
                                         type="password" id="admin">
                                     @error('password')
