@@ -12,6 +12,7 @@
                 <div class="modal-body">
                     <form action="" method="POST">
                         @csrf
+                        <input type="hidden" nama="id_kelas" value="{{ $id }}">
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
