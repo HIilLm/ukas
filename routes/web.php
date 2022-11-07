@@ -24,6 +24,7 @@ Route::get('/login', function () {
 
 Route::get('/',function()
 {
+    // return abort(403);
     return view('dashboards.index',[
         'page' => 'Dashboard'
     ]);

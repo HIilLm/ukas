@@ -20,7 +20,7 @@
         }
     </style>
     <!-- Title -->
-    <title>{{ $page }}</title>
+    <title>Uang Kas - {{ $page }}</title>
 
     {{-- Icon Image for Web Icon --}}
     <link rel="shortcut icon" href="{{ asset('smkn1.ico') }}">
