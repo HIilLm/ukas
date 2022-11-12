@@ -27,7 +27,7 @@
                 <div class="col-md-6 col-xl-3">
                     <div class="card stat-widget">
                         <div class="card-body">
-                            <h5 class="card-title"><i data-feather="users"></i> Kelas</h5>
+                            <h5 class="card-title"><i data-feather="users"></i> Siswa</h5>
                             <p>Jumlah Siswa</p>
                             <br>
                             <h2>200 ORANG</h2>

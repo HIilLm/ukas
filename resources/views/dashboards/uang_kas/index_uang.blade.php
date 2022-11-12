@@ -70,7 +70,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary">Tambah</button>
                     </form>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                             <p class="card-text">Rp. 5,000 / minggu
                                 <br>
                                 Total Uang Kas Bulan Ini:
-                            <p class="btn btn-warning">
+                            <p class="btn btn-warning" style="cursor: default">
                                 Rp. 45,000
                             </p>
                             <br>
