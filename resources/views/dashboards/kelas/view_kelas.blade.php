@@ -214,14 +214,24 @@
                                             {{ $item->name }}
                                         </td>
                                         <td>{{ $item->nisn }}</td>
-                                        <td> {{-- Admin Akses --}}
+
+                                        {{-- ADMIN ACCESS --}}
+                                        <td>
                                             <div class="form-check form-switch">
                                                 <label class="form-check-label"
-                                                    for="flexSwitchCheckDefault">Bendahara</label>
+                                                for="flexSwitchCheckDefault">Bendahara</label>
                                                 <input class="form-check-input" type="checkbox"
-                                                    id="flexSwitchCheckDefault">
+                                                id="flexSwitchCheckDefault">
                                             </div>
                                         </td>
+                                        {{-- ADMIN ACCESS --}}
+
+                                        {{-- BENDAHARA ACCESS --}}
+                                        {{-- <td>
+                                            --
+                                        </td> --}}
+                                        {{-- BENDAHARA ACCESS --}}
+
                                         <td style="">
                                             <div class="dropdown dropright">
                                                 <button class="btn btn-secondary" type="button" id="dropdownMenuButton"
