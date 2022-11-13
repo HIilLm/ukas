@@ -6,6 +6,7 @@ use App\Models\Kelas;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use PhpParser\Node\Stmt\Return_;
 
 class KelasController extends Controller
 {
@@ -100,7 +101,8 @@ class KelasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Kelas::find($id)->delete();
+        return redirect()->back();
     }
 
     public function tambah_siswa(Request $request)
@@ -155,5 +157,11 @@ class KelasController extends Controller
 
         // User::find($id)->update($validated);
         // return redirect()->back();
+    }
+
+    public function hapus_siswa($id)
+    {
+        User::find($id)->delete();
+        return redirect()->back();
     }
 }

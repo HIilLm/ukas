@@ -30,7 +30,7 @@
                             </div>
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">name Siswa</label>
+                                    <label for="name" class="form-label">Nama Siswa</label>
                                     <div class="input-group mb-3">
                                         <input type="text" name="name" class="form-control"
                                             @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}"
@@ -129,7 +129,7 @@
                             </div>
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="edit_name" class="form-label">name Siswa</label>
+                                    <label for="edit_name" class="form-label">Nama Siswa</label>
                                     <div class="input-group mb-3">
                                         <input type="text" name="name" class="form-control"
                                             @error('name') is-invalid @enderror" id="edit_name" value="{{ old('name') }}"
@@ -243,12 +243,13 @@
                                                             data-bs-target="#exampleModal1" style="cursor: pointer">Edit</a> {{-- Berupa Modal --}}
                                                     </li>
                                                     <li>
-                                                        {{-- <form id="form-delete{{ $p->id }}"
-                                                            action="/admin/opportunity_image/image/{{ $p->id }}"
+                                                        <form id="form-delete{{ $item->id }}"
+                                                            action="{{ route("siswa.delete", ["id" => $item->id]) }}"
                                                             method="post" style="display: none">
+                                                            @method("delete")
                                                             @csrf
-                                                        </form> --}}
-                                                        <a class="dropdown-item text-dark" style="cursor: pointer" {{-- onclick="what({{ $p->id }})" --}}>
+                                                        </form>
+                                                        <a class="dropdown-item text-dark" style="cursor: pointer" onclick="what({{ $item->id }})">
                                                             Delete
                                                         </a>
                                                     </li>

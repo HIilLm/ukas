@@ -107,12 +107,13 @@
                                                         data-bs-target="#exampleModalCenter1" onclick="sendData([{{ $item->id }}, '{{ $item->nama_kelas }}'])" style="cursor: pointer">Edit</a>
                                                 </li>
                                                 <li>
-                                                    {{-- <form id="form-delete{{ $p->id }}"
-                                                            action="/admin/opportunity_image/image/{{ $p->id }}"
+                                                    <form id="form-delete{{ $item->id }}"
+                                                            action="{{ route("kelas.destroy", ["kela" => $item->id]) }}"
                                                             method="post" style="display: none">
                                                             @csrf
-                                                        </form> --}}
-                                                    <a class="dropdown-item text-dark" style="cursor: pointer"   {{-- onclick="what({{ $p->id }})" --}}>
+                                                            @method("delete")
+                                                        </form>
+                                                    <a class="dropdown-item text-dark" style="cursor: pointer" onclick="what({{ $item->id }})">
                                                         Delete
                                                     </a>
                                                 </li>
