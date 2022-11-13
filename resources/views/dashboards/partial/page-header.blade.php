@@ -3,8 +3,14 @@
         <div class="" id="navbarNav">
             <ul class="navbar-nav" id="leftNav">
                 <li class="nav-item">
-                    <img src="{{ asset('/images.png') }}" style="height: 40px" alt="">
-                    {{-- <a class="nav-link" id="sidebar-toggle" href="#"><i data-feather="arrow-left"></i></a> --}}
+                    <a class="nav-link" id="sidebar-toggle" href="#"><i data-feather="arrow-left"></i></a>
+                  </li>
+                <li class="nav-item">
+                 {{-- <a href="/" class="nav-link" id="sidebar-toggle"> --}}
+                    <a class="imgpno logo navbar-brand " href="/">
+                     <img src="{{ asset('/images.png') }}" style="height: 40px" alt="http://www.smkn1-sby.sch.id/">
+                </a>
+                    {{-- <a class="nav-link" id="sidebar-toggle"  href="#"><i data-feather="arrow-left"></i></a> --}}
                 </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>

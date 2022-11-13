@@ -1,10 +1,10 @@
 @extends('layouts.error')
-@section('title' ,'404 - Not Found')
+@section('title' , '403 - Forbidden')
 @section('error')
 <div class="error-container">
     <div class="error-info">
-        <h1>404</h1>
-        <p>It seems that the page you are looking for no longer exists.<br>go to the <a
+        <h1>403</h1>
+        <p>Sorry your acces is denied.<br>go to the <a
                 href="/">dashboard</a>.</p>
     </div>
     <div class="error-image"></div>
