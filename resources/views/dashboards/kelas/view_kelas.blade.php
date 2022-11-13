@@ -208,12 +208,12 @@
                                 @foreach ($siswa as $item)
                                     <tr>
                                         <td>
-                                            27
+                                            {{ $item->absen }}
                                         </td>
                                         <td>
-                                            Elang Pandi
+                                            {{ $item->name }}
                                         </td>
-                                        <td>0009123321</td>
+                                        <td>{{ $item->nisn }}</td>
                                         <td> {{-- Admin Akses --}}
                                             <div class="form-check form-switch">
                                                 <label class="form-check-label"

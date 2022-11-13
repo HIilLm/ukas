@@ -162,11 +162,7 @@
                                         Elang Pandi
                                     </td>
                                     <td>0009123321</td>
-                                    <td> {{-- Admin Akses --}}
-                                        {{-- <div class="form-check form-switch">
-                                            <label class="form-check-label" for="flexSwitchCheckDefault">Bendahara</label>
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                        </div> --}}
+                                    <td> {{-- Bendahara Akses --}}
                                         --
                                     </td>
                                     <td style="">
