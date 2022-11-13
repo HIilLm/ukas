@@ -10,7 +10,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST">
+                    <form action="{{ route('siswa.create') }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col">
@@ -30,12 +30,12 @@
                             </div>
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="nama" class="form-label">Nama Siswa</label>
+                                    <label for="name" class="form-label">name Siswa</label>
                                     <div class="input-group mb-3">
-                                        <input type="text" name="nama" class="form-control"
-                                            @error('nama') is-invalid @enderror" id="nama" value="{{ old('nama') }}"
+                                        <input type="text" name="name" class="form-control"
+                                            @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}"
                                             required>
-                                        @error('nama')
+                                        @error('name')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -76,6 +76,19 @@
                             </div>
                         </div>
 
+                        <div class="d-none">
+                            <label for="kelas_id" class="form-label">kelas_id</label>
+                            <div class="input-group mb-3">
+                                <input type="number" min="1" name="kelas_id" class="form-control"
+                                    @error('kelas_id') is-invalid @enderror" id="kelas_id" value="{{ $kelas_id }}">
+                                @error('kelas_id')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -96,15 +109,16 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST">
+                    <form  id="update" method="POST">
                         @csrf
+                        @method("PUT")
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="absen" class="form-label">No Absen</label>
+                                    <label for="edit_absen" class="form-label">No Absen</label>
                                     <div class="input-group mb-3">
                                         <input type="number" min="1" name="absen" class="form-control"
-                                            @error('absen') is-invalid @enderror" id="absen" value="27">
+                                            @error('absen') is-invalid @enderror" id="edit_absen" value="{{ old('absen') }}">
                                         @error('absen')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -115,12 +129,12 @@
                             </div>
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="nama" class="form-label">Nama Siswa</label>
+                                    <label for="edit_name" class="form-label">name Siswa</label>
                                     <div class="input-group mb-3">
-                                        <input type="text" name="nama" class="form-control"
-                                            @error('nama') is-invalid @enderror" id="nama" value="Elang Pandi"
+                                        <input type="text" name="name" class="form-control"
+                                            @error('name') is-invalid @enderror" id="edit_name" value="{{ old('name') }}"
                                             required>
-                                        @error('nama')
+                                        @error('name')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -132,10 +146,10 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="nisn" class="form-label">NISN Siswa</label>
+                                    <label for="edit_nisn" class="form-label">NISN Siswa</label>
                                     <div class="input-group mb-3">
                                         <input type="number" min="1" name="nisn" class="form-control"
-                                            @error('nisn') is-invalid @enderror" id="nisn" value="0009123321">
+                                            @error('nisn') is-invalid @enderror" id="edit_nisn" value="{{ old('nisn') }}">
                                         @error('nisn')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -146,10 +160,10 @@
                             </div>
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email Siswa</label>
+                                    <label for="edit_email" class="form-label">Email Siswa</label>
                                     <div class="input-group mb-3">
                                         <input type="text" min="1" name="email" class="form-control"
-                                            @error('email') is-invalid @enderror" id="email" value="0009123321">
+                                            @error('email') is-invalid @enderror" id="edit_email" value="{{ old('email') }}">
                                         @error('email')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -175,9 +189,9 @@
             <div class="row">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Detail Kelas 12 RPL 1</h5>
-                        <a href="{{ route('siswa.create', ['id' => $id_kelas]) }}" class="btn btn-primary mb-3"
-                            data-bs-toggle="modal" data-bs-target="#exampleModal">Tambah Siswa</a> {{-- Berupa modal --}}
+                        <h5 class="card-title">Detail Kelas {{ $kelas->nama_kelas }}</h5>
+                        <a href="#" class="btn btn-primary mb-3" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">Tambah Siswa</a> {{-- Berupa modal --}}
                         <table id="logo-table" class="display"
                             style="table-layout:fixed;
                             width:100%;">
@@ -251,21 +265,14 @@
     </div>
 @endsection
 @section('js')
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
     <script>
-        $(document).ready(function() {
-            var id;
-            $('.editable').each(function() {
-                id = $(this).attr('id');
-                if (id != '') {
-                    $('#' + id).summernote({
-                        height: 120,
-                    });
-                }
-            })
-        });
-
-        var table = $('#logo-table').DataTable({});
+        var table = $('#logo-table').DataTable();
+        // function sendData(data){
+        //     $("#update").attr("action", "/kelas/perbaruis/" + data[0]);
+        //     $("#edit_name").attr("value", data[1]);
+        //     $("#edit_nisn").attr("value", data[2]);
+        //     $("#edit_absen").attr("value", data[3]);
+        //     $("#edit_email").attr("value", data[4]);
+        // }
     </script>
 @endsection

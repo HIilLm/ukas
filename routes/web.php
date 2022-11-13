@@ -93,5 +93,6 @@ Route::get('/laporan',function()
 });
 
 Route::resource('/kelas', KelasController::class);
-Route::get('kelas/{id}/createsiswa', [KelasController::class, "tambah_siswa"])->name("siswa.create");
+Route::post('kelas/createsiswa', [KelasController::class, "tambah_siswa"])->name("siswa.create");
+Route::post('kelas/perbaruis/{id}', [KelasController::class, "perbarui_siswa"])->name("siswa.update");
 Route::put('/kelas/perbarui/{id}', [KelasController::class, "perbarui"]);
