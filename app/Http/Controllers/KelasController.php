@@ -6,6 +6,7 @@ use App\Models\Kelas;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 use PhpParser\Node\Stmt\Return_;
 
 class KelasController extends Controller
@@ -57,7 +58,7 @@ class KelasController extends Controller
     public function show($id)
     {
         return view("dashboards.kelas.view_kelas", [
-            "siswa" => Kelas::find($id)->user,
+            "siswa" => Kelas::find($id)->user->load(['kelas']),
             "kelas" => Kelas::find($id),
             "kelas_id" => $id,
             "page" => "Kelas"
@@ -117,12 +118,12 @@ class KelasController extends Controller
         ];
         $validated = $request->validate([
             "name" => "required",
-            "email" => "required",
+            "email" => "required|unique:users",
             "kelas_id" => "required",
             "nisn" => "digits_between:6,12|numeric|unique:users|required",
             "absen" => "required|numeric"
         ]);
-        $validated["password"] = encrypt($request->nisn);
+        $validated["password"] = bcrypt($request->nisn);
         $validated["role_id"] = 3;
         // $buka = decrypt($validated["password"]);
         // dd($validated["password"]);

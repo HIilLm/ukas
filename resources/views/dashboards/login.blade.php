@@ -65,7 +65,7 @@
                                 </button>
                             </div>
                         @endif
-                        <form method="POST" action="/login">
+                        <form method="POST" action="{{ route('authenticate') }}">
                             @csrf
                             <div class="mb-3">
                                 <div class="form-floating">

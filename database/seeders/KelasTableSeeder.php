@@ -14,20 +14,20 @@ class KelasTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('kelas')->delete();
-        
+
         \DB::table('kelas')->insert(array (
-            0 => 
+            0 =>
             array (
-                'id' => 2,
+                'id' => 1,
                 'nama_kelas' => '12 RPL 1',
                 'created_at' => '2022-11-12 09:23:29',
                 'updated_at' => '2022-11-12 09:23:29',
             ),
         ));
-        
-        
+
+
     }
 }

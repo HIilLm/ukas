@@ -205,6 +205,7 @@
                                 </tr>
                             </thead>
                             <tbody id="images">
+                                {{-- @dd($siswa) --}}
                                 @foreach ($siswa as $item)
                                     <tr>
                                         <td>
@@ -228,7 +229,7 @@
 
                                         {{-- BENDAHARA ACCESS --}}
                                         {{-- <td>
-                                            --
+                                            {{ decrypt($item->password) }}
                                         </td> --}}
                                         {{-- BENDAHARA ACCESS --}}
 
