@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SiswaController extends Controller
@@ -34,7 +35,10 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            "nama_kelas" => "required"
+        ]);
+        User::create($validated);
     }
 
     /**

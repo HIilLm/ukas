@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\SiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,5 +95,6 @@ Route::get('/laporan',function()
 });
 
 Route::resource('/kelas', KelasController::class);
+Route::resource('/siswa', SiswaController::class);
 Route::get('kelas/{id}/createsiswa', [KelasController::class, "tambah_siswa"])->name("siswa.create");
 Route::put('/kelas/perbarui/{id}', [KelasController::class, "perbarui"]);
