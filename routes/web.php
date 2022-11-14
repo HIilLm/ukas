@@ -26,6 +26,7 @@ Route::get('/login', function () {
 Route::get('/',function()
 {
     // return abort(403);
+    // return abort(500);
     return view('dashboards.index',[
         'page' => 'Dashboard'
     ]);
@@ -95,6 +96,7 @@ Route::get('/laporan',function()
 });
 
 Route::resource('/kelas', KelasController::class);
-Route::resource('/siswa', SiswaController::class);
-Route::get('kelas/{id}/createsiswa', [KelasController::class, "tambah_siswa"])->name("siswa.create");
+Route::post('kelas/createsiswa', [KelasController::class, "tambah_siswa"])->name("siswa.create");
+Route::put('kelas/perbaruis/{id}', [KelasController::class, "perbarui_siswa"])->name("siswa.update");
 Route::put('/kelas/perbarui/{id}', [KelasController::class, "perbarui"]);
+Route::delete('/kelas/siswa/{id}', [KelasController::class, "hapus_siswa"])->name("siswa.delete");

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelas;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use PhpParser\Node\Stmt\Return_;
 
 class KelasController extends Controller
 {
@@ -54,9 +57,10 @@ class KelasController extends Controller
     public function show($id)
     {
         return view("dashboards.kelas.view_kelas", [
-            "siswa" => Kelas::find($id)->user,
-            "id_kelas" => $id,
-            "page" => "kelas"
+            "siswa" => Kelas::findOrFail($id)->user->load('Kelas'),
+            "kelas" => Kelas::find($id),
+            "kelas_id" => $id,
+            "page" => "Kelas"
         ]);
         // dd($id);
     }
@@ -97,6 +101,65 @@ class KelasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Kelas::find($id)->delete();
+        return redirect()->back();
+    }
+
+    public function tambah_siswa(Request $request)
+    {
+        // dd($request->nisn);
+        $message = [
+            'required' => ':attribute mohon diisi terlebih dahulu',
+            'email' => ':attribute mohon massukan format email yang benar, contoh = email@email.email',
+            'name.min' => ':attribute mohon masukkan minimal 5 karakter',
+            'unique' => ':attribute sudah ada,mohon masukkan yang lain',
+            'digits_between' => ':attribute minimal panjang 6,maximal panjang 12',
+        ];
+        $validated = $request->validate([
+            "name" => "required",
+            "email" => "required",
+            "kelas_id" => "required",
+            "nisn" => "digits_between:6,12|numeric|unique:users|required",
+            "absen" => "required|numeric"
+        ]);
+        $validated["password"] = bcrypt($request->nisn);
+        $validated["role_id"] = 3;
+        // $buka = decrypt($validated["password"]);
+        // dd($validated["password"]);
+        // dd($buka);
+
+        User::create($validated);
+        return redirect()->back();
+
+        // dd($id);
+    }
+
+    public function perbarui_siswa(Request $request,$id)
+    {
+        // $message = [
+        //     'required' => ':attribute mohon diisi terlebih dahulu',
+        //     'email' => ':attribute mohon massukan format email yang benar, contoh = email@email.email',
+        //     'name.min' => ':attribute mohon masukkan minimal 5 karakter',
+        //     'unique' => ':attribute sudah ada,mohon masukkan yang lain',
+        //     'digits_between' => ':attribute minimal panjang 6,maximal panjang 12',
+        // ];
+        // $validated = $request->validate([
+        //     "name" => "required",
+        //     "email" => "required",
+        //     "kelas_id" => "required",
+        //     "nisn" => "digits_between:6,12|numeric|unique:users|required",
+        //     "absen" => "required|numeric"
+        // ]);
+        // $validated["password"] = encrypt($request->nisn);
+        // $validated["role_id"] = 3;
+
+        // User::find($id)->update($validated);
+        // return redirect()->back();
+    }
+
+    public function hapus_siswa($id)
+    {
+        User::find($id)->delete();
+        return redirect()->back();
     }
 }

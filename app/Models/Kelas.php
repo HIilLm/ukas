@@ -11,6 +11,6 @@ class Kelas extends Model
     protected $fillable = ["nama_kelas"];
 
     public function user() {
-        return $this->hasMany(User::class, 'id_kelas');
+        return $this->hasMany(User::class, 'kelas_id', 'id');
     }
 }

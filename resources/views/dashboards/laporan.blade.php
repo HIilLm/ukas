@@ -100,7 +100,7 @@
 
                         </table>
 
-                        <span class="btn btn-secondary">
+                        <span class="btn btn-secondary" style="cursor: auto">
                             Total Pemasukkan: Rp. 25,000
                           </span>
                     </div>
