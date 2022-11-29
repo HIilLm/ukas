@@ -104,8 +104,9 @@
                                                     {{-- hrefnya perkelas  /detail/kelas   contoh = /detail/12RPL1 --}}
                                                 <li>
                                                     <a class="dropdown-item text-dark" data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModalCenter1" onclick="sendData([{{ $item->id }}, '{{ $item->nama_kelas }}'])" style="cursor: pointer">Edit</a>
+                                                        data-bs-target="#exampleModalCenter1" onclick="sendData({{ $item }})" style="cursor: pointer">Edit</a>
                                                 </li>
+                                                {{-- [{{ $item->id }}, '{{ $item->nama_kelas }}'] --}}
                                                 <li>
                                                     <form id="form-delete{{ $item->id }}"
                                                             action="{{ route("kelas.destroy", ["kela" => $item->id]) }}"
@@ -141,6 +142,7 @@
     <script>
         var table = $('#logo-table').DataTable();
         function sendData(data){
+            data = Object.values(data);
             $("#update").attr("action", "/kelas/perbarui/" + data[0]);
             $("#edit_kelas").attr("value", data[1]);
         }

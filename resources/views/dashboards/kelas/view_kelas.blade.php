@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-
+{{-- @dd($siswa->where("role_id", 2)->first()) --}}
 @section('content')
     {{-- MODAL TAMBAH --}}
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -100,7 +100,7 @@
         </div>
     </div>
     {{-- MODAL TAMBAH --}}
-
+    {{-- @dd($siswa->where('role_id', 2)->first()->id) --}}
     {{-- MODAL EDIT --}}
     <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -110,16 +110,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form  id="update" method="POST">
+                    <form id="update" method="POST">
                         @csrf
-                        @method("PUT")
+                        @method('PUT')
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="edit_absen" class="form-label">No Absen</label>
                                     <div class="input-group mb-3">
                                         <input type="number" min="1" name="absen" class="form-control"
-                                            @error('absen') is-invalid @enderror" id="edit_absen" value="{{ old('absen') }}">
+                                            @error('absen') is-invalid @enderror" id="edit_absen"
+                                            value="{{ old('absen') }}">
                                         @error('absen')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -133,8 +134,8 @@
                                     <label for="edit_name" class="form-label">Nama Siswa</label>
                                     <div class="input-group mb-3">
                                         <input type="text" name="name" class="form-control"
-                                            @error('name') is-invalid @enderror" id="edit_name" value="{{ old('name') }}"
-                                            required>
+                                            @error('name') is-invalid @enderror" id="edit_name"
+                                            value="{{ old('name') }}" required>
                                         @error('name')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -150,7 +151,8 @@
                                     <label for="edit_nisn" class="form-label">NISN Siswa</label>
                                     <div class="input-group mb-3">
                                         <input type="number" min="1" name="nisn" class="form-control"
-                                            @error('nisn') is-invalid @enderror" id="edit_nisn" value="{{ old('nisn') }}">
+                                            @error('nisn') is-invalid @enderror" id="edit_nisn"
+                                            value="{{ old('nisn') }}">
                                         @error('nisn')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -164,7 +166,8 @@
                                     <label for="edit_email" class="form-label">Email Siswa</label>
                                     <div class="input-group mb-3">
                                         <input type="text" min="1" name="email" class="form-control"
-                                            @error('email') is-invalid @enderror" id="edit_email" value="{{ old('email') }}">
+                                            @error('email') is-invalid @enderror" id="edit_email"
+                                            value="{{ old('email') }}">
                                         @error('email')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -189,13 +192,13 @@
         <div class="main-wrapper">
             <div class="row">
                 @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $item)
-                        <li>{{ $item }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $item)
+                                <li>{{ $item }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
                 <div class="card">
                     <div class="card-body">
@@ -215,7 +218,9 @@
                                 </tr>
                             </thead>
                             <tbody id="images">
+                                {{-- @dd($siswa) --}}
                                 @foreach ($siswa as $item)
+                                    {{-- @dd($item) --}}
                                     <tr>
                                         <td>
                                             {{ $item->absen }}
@@ -229,16 +234,19 @@
                                         <td>
                                             <div class="form-check form-switch">
                                                 <label class="form-check-label"
-                                                for="flexSwitchCheckDefault">Bendahara</label>
-                                                <input class="form-check-input" type="checkbox"
-                                                id="flexSwitchCheckDefault">
+                                                    for="flexSwitchCheckDefault">Bendahara</label>
+                                                <input class="form-check-input abk{{ $item->id }} switch-box"
+                                                    {{ $bendahara == 2 && $item->role_id != 2 ? 'disabled' : '' }}
+                                                    {{ $item->role_id == 2 ? 'checked' : '' }} type="checkbox"
+                                                    id="checked-{{ $item->id }}"
+                                                    onclick="checking({{ $item->id }})">
                                             </div>
                                         </td>
                                         {{-- ADMIN ACCESS --}}
 
                                         {{-- BENDAHARA ACCESS --}}
                                         {{-- <td>
-                                            --
+                                            {{ decrypt($item->password) }}
                                         </td> --}}
                                         {{-- BENDAHARA ACCESS --}}
 
@@ -250,16 +258,18 @@
                                                 </button>
                                                 <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
                                                     <li><a class="dropdown-item text-dark" data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModal1" style="cursor: pointer">Edit</a> {{-- Berupa Modal --}}
+                                                            data-bs-target="#exampleModal1" style="cursor: pointer"
+                                                            onclick="sendData()">Edit</a> {{-- Berupa Modal --}}
                                                     </li>
                                                     <li>
                                                         <form id="form-delete{{ $item->id }}"
-                                                            action="{{ route("siswa.delete", ["id" => $item->id]) }}"
+                                                            action="{{ route('siswa.delete', ['id' => $item->id]) }}"
                                                             method="post" style="display: none">
-                                                            @method("delete")
+                                                            @method('delete')
                                                             @csrf
                                                         </form>
-                                                        <a class="dropdown-item text-dark" style="cursor: pointer" onclick="what({{ $item->id }})">
+                                                        <a class="dropdown-item text-dark" style="cursor: pointer"
+                                                            onclick="what({{ $item->id }})">
                                                             Delete
                                                         </a>
                                                     </li>
@@ -288,11 +298,92 @@
 @section('js')
     <script>
         var table = $('#logo-table').DataTable();
-        function sendData(data){
-            $("#update").attr("action", "/kelas/perbarui/" + data[0]);
-            $("#edit_absen").attr("value", data[1]);
+
+        function sendData(data) {
+            console.log(Object.values(data));
+            data = Object.values(data);
+            $("#update").attr("action", "/kelas/perbaruis/" + data[0]);
+            $("#edit_absen").attr("value", data[3]);
+            $("#edit_nisn").attr("value", data[2]);
             $("#edit_name").attr("value", data[1]);
-            $("#edit_").attr("value", data[1]);
+            $("#edit_email").attr("value", data[6]);
         }
+
+        function checking(id) {
+            if ($('#checked-' + id).prop('checked') == true) {
+                $.ajax({
+                    type: "post",
+                    url: "/kelas/bendahara",
+                    dataType: "json",
+                    data: {
+                        id: id,
+                        kelas: {{ $kelas_id }},
+                        bendahara: true,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(bendahara) {
+                        console.log(bendahara);
+                        if (bendahara[0] == 2) {
+                            $("input[type=checkbox]").prop('disabled', true);
+                            $(".abk" + bendahara[1]).prop('disabled', false);
+                            $(".abk" + bendahara[2]).prop('disabled', false);
+                        } else {
+                            $("input[type=checkbox]").prop('disabled', false);
+                        }
+                        console.log(bendahara);
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                    }
+                });
+            } else {
+                $.ajax({
+                    type: "post",
+                    url: "/kelas/bendahara",
+                    dataType: "json",
+                    data: {
+                        id: id,
+                        kelas: {{ $kelas_id }},
+                        bendahara: null,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(bendahara) {
+                        if (bendahara[0] == 2) {
+                            $("input[type=checkbox]").prop('disabled', true);
+                            $(".abk" + bendahara[1]).prop('disabled', false);
+                            $(".abk" + bendahara[1]).prop('disabled', false);
+                        } else {
+                            $("input[type=checkbox]").prop('disabled', false);
+                        }
+                        console.log(bendahara);
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                    }
+                });
+            }
+
+        }
+        // $(".check-box").on("click", function(event) {
+        //     event.preventDefault();
+        //     var url = $(this).attr("href"),
+        //         appendedContainer = $(".appendedContainer");
+
+        //     $.ajax({
+        //         url: url,
+        //         type: 'get',
+        //         complete: function(qXHR, textStatus) {
+        //             if (textStatus === 'success') {
+        //                 var data = qXHR.responseText
+        //                 appendedContainer.hide();
+        //                 appendedContainer.append(data);
+        //                 appendedContainer.fadeIn();
+        //             }
+        //         }
+        //     });
+
+        // });
     </script>
 @endsection

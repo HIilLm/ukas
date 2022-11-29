@@ -17,6 +17,7 @@
                 </li> --}}
             </ul>
         </div>
+        @auth
         <div class="headerNav">
             <div class="ms-5">
                 <a class="dark" href="#" onclick="out()">
@@ -24,11 +25,12 @@
                     <i data-feather="log-out"></i>
                 </a>
                 <form id="logout-form"
-                {{-- action="{{ route('logout') }}" --}}
+                action="{{ route('logout') }}"
                  method="POST" class="d-none">
                     @csrf
                 </form>
             </div>
         </div>
+        @endauth
     </nav>
 </div>

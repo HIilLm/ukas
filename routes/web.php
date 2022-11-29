@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
@@ -19,17 +20,11 @@ use App\Http\Controllers\SiswaController;
 //     return view('welcome');
 // });
 
-Route::get('/login', function () {
-    return view('dashboards.login');
-});
 
-Route::get('/',function()
-{
-    // return abort(403);
-    // return abort(500);
-    return view('dashboards.index',[
-        'page' => 'Dashboard'
-    ]);
+
+Route::middleware(['guest'])->group(function () {
+Route::get('/login',[AuthController::class, "login"])->middleware('guest')->name("login");
+Route::post('/login',[AuthController::class, "authenticate"])->middleware('guest')->name("authenticate");
 });
 
 // Route::get('/admin/kelas',function()
@@ -95,8 +90,21 @@ Route::get('/laporan',function()
     ]);
 });
 
-Route::resource('/kelas', KelasController::class);
-Route::post('kelas/createsiswa', [KelasController::class, "tambah_siswa"])->name("siswa.create");
-Route::put('kelas/perbaruis/{id}', [KelasController::class, "perbarui_siswa"])->name("siswa.update");
-Route::put('/kelas/perbarui/{id}', [KelasController::class, "perbarui"]);
-Route::delete('/kelas/siswa/{id}', [KelasController::class, "hapus_siswa"])->name("siswa.delete");
+// Route::middleware(['auth'])->group(function () {
+    Route::get('/',function()
+    {
+    // return abort(403);
+    // return abort(500);
+    return view('dashboards.index',[
+        'page' => 'Dashboard'
+    ]);
+
+    });
+    Route::post('/',[AuthController::class, "logout"])->name("logout");
+    Route::resource('/kelas', KelasController::class);
+    Route::post('kelas/createsiswa', [KelasController::class, "tambah_siswa"])->name("siswa.create");
+    Route::put('kelas/perbaruis/{id}', [KelasController::class, "perbarui_siswa"])->name("siswa.update");
+    Route::put('/kelas/perbarui/{id}', [KelasController::class, "perbarui"]);
+    Route::post('/kelas/bendahara', [KelasController::class, "bendahara"]);
+    Route::delete('/kelas/siswa/{id}', [KelasController::class, "hapus_siswa"])->name("siswa.delete");
+// });
