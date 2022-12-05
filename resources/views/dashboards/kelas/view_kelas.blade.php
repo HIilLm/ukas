@@ -109,16 +109,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form  id="update" method="POST">
+                    <form id="update" method="POST">
                         @csrf
-                        @method("PUT")
+                        @method('PUT')
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="edit_absen" class="form-label">No Absen</label>
                                     <div class="input-group mb-3">
                                         <input type="number" min="1" name="absen" class="form-control"
-                                            @error('absen') is-invalid @enderror" id="edit_absen" value="{{ old('absen') }}">
+                                            @error('absen') is-invalid @enderror" id="edit_absen"
+                                            value="{{ old('absen') }}">
                                         @error('absen')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -132,8 +133,8 @@
                                     <label for="edit_name" class="form-label">Nama Siswa</label>
                                     <div class="input-group mb-3">
                                         <input type="text" name="name" class="form-control"
-                                            @error('name') is-invalid @enderror" id="edit_name" value="{{ old('name') }}"
-                                            required>
+                                            @error('name') is-invalid @enderror" id="edit_name"
+                                            value="{{ old('name') }}" required>
                                         @error('name')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -149,7 +150,8 @@
                                     <label for="edit_nisn" class="form-label">NISN Siswa</label>
                                     <div class="input-group mb-3">
                                         <input type="number" min="1" name="nisn" class="form-control"
-                                            @error('nisn') is-invalid @enderror" id="edit_nisn" value="{{ old('nisn') }}">
+                                            @error('nisn') is-invalid @enderror" id="edit_nisn"
+                                            value="{{ old('nisn') }}">
                                         @error('nisn')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -163,7 +165,8 @@
                                     <label for="edit_email" class="form-label">Email Siswa</label>
                                     <div class="input-group mb-3">
                                         <input type="text" min="1" name="email" class="form-control"
-                                            @error('email') is-invalid @enderror" id="edit_email" value="{{ old('email') }}">
+                                            @error('email') is-invalid @enderror" id="edit_email"
+                                            value="{{ old('email') }}">
                                         @error('email')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -190,8 +193,14 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Detail Kelas {{ $kelas->nama_kelas }}</h5>
-                        <a href="#" class="btn btn-primary mb-3" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">Tambah Siswa</a> {{-- Berupa modal --}}
+                        <div class="row">
+                            <div class="col">
+                                <a href="#" class="btn btn-primary mb-3 me-2" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">Tambah Siswa</a> {{-- Berupa modal --}}
+                                <a href="" class="btn btn-danger mb-3">Export</a> {{-- ONLY ADMIN --}}
+                                {{-- <i data-feather="file-text"></i> --}}
+                            </div>
+                        </div>
                         <table id="logo-table" class="display"
                             style="table-layout:fixed;
                             width:100%;">
@@ -220,9 +229,9 @@
                                         <td>
                                             <div class="form-check form-switch">
                                                 <label class="form-check-label"
-                                                for="flexSwitchCheckDefault">Bendahara</label>
+                                                    for="flexSwitchCheckDefault">Bendahara</label>
                                                 <input class="form-check-input" type="checkbox"
-                                                id="flexSwitchCheckDefault">
+                                                    id="flexSwitchCheckDefault">
                                             </div>
                                         </td>
                                         {{-- ADMIN ACCESS --}}
@@ -241,16 +250,18 @@
                                                 </button>
                                                 <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
                                                     <li><a class="dropdown-item text-dark" data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModal1" style="cursor: pointer">Edit</a> {{-- Berupa Modal --}}
+                                                            data-bs-target="#exampleModal1"
+                                                            style="cursor: pointer">Edit</a> {{-- Berupa Modal --}}
                                                     </li>
                                                     <li>
                                                         <form id="form-delete{{ $item->id }}"
-                                                            action="{{ route("siswa.delete", ["id" => $item->id]) }}"
+                                                            action="{{ route('siswa.delete', ['id' => $item->id]) }}"
                                                             method="post" style="display: none">
-                                                            @method("delete")
+                                                            @method('delete')
                                                             @csrf
                                                         </form>
-                                                        <a class="dropdown-item text-dark" style="cursor: pointer" onclick="what({{ $item->id }})">
+                                                        <a class="dropdown-item text-dark" style="cursor: pointer"
+                                                            onclick="what({{ $item->id }})">
                                                             Delete
                                                         </a>
                                                     </li>
