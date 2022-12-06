@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-
+{{-- @dd($siswa->where("role_id", 2)->first()) --}}
 @section('content')
     {{-- MODAL TAMBAH --}}
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -12,6 +12,7 @@
                 <div class="modal-body">
                     <form action="{{ route('siswa.create') }}" method="POST">
                         @csrf
+                        <input type="hidden" name="kelas_id" value="{{ $kelas_id }}">
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
@@ -99,7 +100,7 @@
         </div>
     </div>
     {{-- MODAL TAMBAH --}}
-
+    {{-- @dd($siswa->where('role_id', 2)->first()->id) --}}
     {{-- MODAL EDIT --}}
     <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -190,6 +191,15 @@
     <div class="page-content">
         <div class="main-wrapper">
             <div class="row">
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $item)
+                                <li>{{ $item }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Detail Kelas {{ $kelas->nama_kelas }}</h5>
@@ -216,6 +226,7 @@
                             <tbody id="images">
                                 {{-- @dd($siswa) --}}
                                 @foreach ($siswa as $item)
+                                    {{-- @dd($item) --}}
                                     <tr>
                                         <td>
                                             {{ $item->absen }}
@@ -230,8 +241,11 @@
                                             <div class="form-check form-switch">
                                                 <label class="form-check-label"
                                                     for="flexSwitchCheckDefault">Bendahara</label>
-                                                <input class="form-check-input" type="checkbox"
-                                                    id="flexSwitchCheckDefault">
+                                                <input class="form-check-input abk{{ $item->id }} switch-box"
+                                                    {{ $bendahara == 2 && $item->role_id != 2 ? 'disabled' : '' }}
+                                                    {{ $item->role_id == 2 ? 'checked' : '' }} type="checkbox"
+                                                    id="checked-{{ $item->id }}"
+                                                    onclick="checking({{ $item->id }})">
                                             </div>
                                         </td>
                                         {{-- ADMIN ACCESS --}}
@@ -250,8 +264,13 @@
                                                 </button>
                                                 <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
                                                     <li><a class="dropdown-item text-dark" data-bs-toggle="modal"
+<<<<<<< HEAD
                                                             data-bs-target="#exampleModal1"
                                                             style="cursor: pointer">Edit</a> {{-- Berupa Modal --}}
+=======
+                                                            data-bs-target="#exampleModal1" style="cursor: pointer"
+                                                            onclick="sendData()">Edit</a> {{-- Berupa Modal --}}
+>>>>>>> b349506e6aef4def5334d691ebfb080a9252ca4f
                                                     </li>
                                                     <li>
                                                         <form id="form-delete{{ $item->id }}"
@@ -290,12 +309,92 @@
 @section('js')
     <script>
         var table = $('#logo-table').DataTable();
-        // function sendData(data){
-        //     $("#update").attr("action", "/kelas/perbaruis/" + data[0]);
-        //     $("#edit_name").attr("value", data[1]);
-        //     $("#edit_nisn").attr("value", data[2]);
-        //     $("#edit_absen").attr("value", data[3]);
-        //     $("#edit_email").attr("value", data[4]);
-        // }
+
+        function sendData(data) {
+            console.log(Object.values(data));
+            data = Object.values(data);
+            $("#update").attr("action", "/kelas/perbaruis/" + data[0]);
+            $("#edit_absen").attr("value", data[3]);
+            $("#edit_nisn").attr("value", data[2]);
+            $("#edit_name").attr("value", data[1]);
+            $("#edit_email").attr("value", data[6]);
+        }
+
+        function checking(id) {
+            if ($('#checked-' + id).prop('checked') == true) {
+                $.ajax({
+                    type: "post",
+                    url: "/kelas/bendahara",
+                    dataType: "json",
+                    data: {
+                        id: id,
+                        kelas: {{ $kelas_id }},
+                        bendahara: true,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(bendahara) {
+                        console.log(bendahara);
+                        if (bendahara[0] == 2) {
+                            $("input[type=checkbox]").prop('disabled', true);
+                            $(".abk" + bendahara[1]).prop('disabled', false);
+                            $(".abk" + bendahara[2]).prop('disabled', false);
+                        } else {
+                            $("input[type=checkbox]").prop('disabled', false);
+                        }
+                        console.log(bendahara);
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                    }
+                });
+            } else {
+                $.ajax({
+                    type: "post",
+                    url: "/kelas/bendahara",
+                    dataType: "json",
+                    data: {
+                        id: id,
+                        kelas: {{ $kelas_id }},
+                        bendahara: null,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(bendahara) {
+                        if (bendahara[0] == 2) {
+                            $("input[type=checkbox]").prop('disabled', true);
+                            $(".abk" + bendahara[1]).prop('disabled', false);
+                            $(".abk" + bendahara[1]).prop('disabled', false);
+                        } else {
+                            $("input[type=checkbox]").prop('disabled', false);
+                        }
+                        console.log(bendahara);
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                    }
+                });
+            }
+
+        }
+        // $(".check-box").on("click", function(event) {
+        //     event.preventDefault();
+        //     var url = $(this).attr("href"),
+        //         appendedContainer = $(".appendedContainer");
+
+        //     $.ajax({
+        //         url: url,
+        //         type: 'get',
+        //         complete: function(qXHR, textStatus) {
+        //             if (textStatus === 'success') {
+        //                 var data = qXHR.responseText
+        //                 appendedContainer.hide();
+        //                 appendedContainer.append(data);
+        //                 appendedContainer.fadeIn();
+        //             }
+        //         }
+        //     });
+
+        // });
     </script>
 @endsection

@@ -90,7 +90,7 @@
                                 @foreach ($kelas as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->nama_kelas}}</td>
+                                        <td>{{ $item->nama_kelas }}</td>
                                         <td style="">
                                             <div class="dropdown dropright">
                                                 <button class="btn btn-secondary" type="button" id="dropdownMenuButton"
@@ -104,9 +104,10 @@
                                                     <li>
                                                         <a class="dropdown-item text-dark" data-bs-toggle="modal"
                                                             data-bs-target="#exampleModalCenter1"
-                                                            onclick="sendData([{{ $item->id }}, '{{ $item->nama_kelas }}'])"
+                                                            onclick="sendData({{ $item }})"
                                                             style="cursor: pointer">Edit</a>
                                                     </li>
+                                                    {{-- [{{ $item->id }}, '{{ $item->nama_kelas }}'] --}}
                                                     <li>
                                                         <form id="form-delete{{ $item->id }}"
                                                             action="{{ route('kelas.destroy', ['kela' => $item->id]) }}"
@@ -144,6 +145,7 @@
         var table = $('#logo-table').DataTable();
 
         function sendData(data) {
+            data = Object.values(data);
             $("#update").attr("action", "/kelas/perbarui/" + data[0]);
             $("#edit_kelas").attr("value", data[1]);
         }

@@ -57,11 +57,13 @@ class KelasController extends Controller
      */
     public function show($id)
     {
+        $bendahara = User::where(["kelas_id" => $id, "role_id" => 2])->count();
         return view("dashboards.kelas.view_kelas", [
-            "siswa" => Kelas::find($id)->user->load(['kelas']),
+            "siswa" => Kelas::findOrFail($id)->user->load('Kelas'),
             "kelas" => Kelas::find($id),
             "kelas_id" => $id,
-            "page" => "Kelas"
+            "page" => "Kelas",
+            "bendahara" => $bendahara
         ]);
         // dd($id);
     }
@@ -122,47 +124,85 @@ class KelasController extends Controller
             "kelas_id" => "required",
             "nisn" => "digits_between:6,12|numeric|unique:users|required",
             "absen" => "required|numeric"
-        ]);
+        ],$message);
         $validated["password"] = bcrypt($request->nisn);
         $validated["role_id"] = 3;
-        // $buka = decrypt($validated["password"]);
-        // dd($validated["password"]);
-        // dd($buka);
 
         User::create($validated);
+        // foreach (User::where("kelas_id", $siswa->kelas_id) as $sis) {
+        //     if ($sis->absen >= $siswa->absen) {
+        //         User::find($sis->id)->update(["absen" => $sis->absen + 1]);
+        //     }
+        // }
         return redirect()->back();
-
-        // dd($id);
     }
 
     public function perbarui_siswa(Request $request,$id)
     {
-        // $message = [
-        //     'required' => ':attribute harus diisi dulu',
-        //     'email' => ':attribute harus email yang bener, contoh = email@email.email',
-        //     'name.min' => ':attribute minimal 5 bang',
-        //     'nisn.min' => ':attribute minimal isi 6 lah',
-        //     'nisn.max' => ':attribute maximal 12,ojk akeh akeh',
-        //     'unique' => ':attribute harus unik bang',
-        //     'digits_between' => ':attribute minimal panjang 6,maximal panjang 12',
-        // ];
-        // $validated = $request->validate([
-        //     "name" => "required",
-        //     "email" => "required",
-        //     "kelas_id" => "required",
-        //     "nisn" => "digits_between:6,12|numeric|unique:users|required",
-        //     "absen" => "required|numeric"
-        // ]);
-        // $validated["password"] = encrypt($request->nisn);
-        // $validated["role_id"] = 3;
+        // dd($request);
+        $message = [
+            'required' => ':attribute mohon diisi terlebih dahulu',
+            'email' => ':attribute mohon massukan format email yang benar, contoh = email@email.email',
+            'name.min' => ':attribute mohon masukkan minimal 5 karakter',
+            'unique' => ':attribute sudah ada,mohon masukkan yang lain',
+            'digits_between' => ':attribute minimal panjang 6,maximal panjang 12',
+        ];
+        if ($request->nisn == User::find($id)->nisn) {
+            $validated = $request->validate([
+                "name" => "required",
+                "email" => "required",
+                "absen" => "required|numeric"
+            ], $message);
+        } else {
+            $validated = $request->validate([
+                "name" => "required",
+                "email" => "required",
+                "nisn" => "digits_between:6,12|numeric|unique:users|required",
+                "absen" => "required|numeric"
+            ], $message);
+            $validated["password"] = bcrypt($request->nisn);
+        }
 
-        // User::find($id)->update($validated);
-        // return redirect()->back();
+        User::find($id)->update($validated);
+        // $siswa = User::find($id);
+        // // dd($siswa);
+        // foreach (User::where("kelas_id", $siswa->kelas_id)->get() as $sis) {
+        //     // dd($sis);
+        //     if ($sis->absen >= $siswa->absen) {
+        //         User::find($sis->id)->update(["absen" => $sis->absen + 1]);
+        //     }
+        // }
+        // dd(User::where("kelas_id", $siswa->kelas_id)->get());
+        return redirect()->back();
     }
 
     public function hapus_siswa($id)
     {
-        User::find($id)->delete();
+        $siswa = User::find($id);
+        // foreach (User::where("kelas_id", $siswa->kelas_id) as $sis) {
+        //     if ($sis->absen > $siswa->absen) {
+        //         User::find($sis->id)->update(["absen" => $sis->absen - 1]);
+        //     }
+        // }
+        $siswa->delete();
         return redirect()->back();
+    }
+
+    public function bendahara(Request $request)
+    {
+        if ($request->bendahara == true) {
+            User::find($request->id)->update(["role_id" => 2]);
+        }else {
+            User::find($request->id)->update(["role_id" => 3]);
+        }
+        $bendahara = User::where(["kelas_id" => $request->kelas, "role_id" => 2])->get();
+        $total[0] = $bendahara->count();
+        if ($bendahara->count() == 2) {
+            foreach ($bendahara as $key => $value) {
+                array_push($total,$value->id);
+            }
+
+        }
+        return response()->json($total);
     }
 }
