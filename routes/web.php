@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\UangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,12 +77,7 @@ Route::get('/admin',function()
     ]);
 });
 
-Route::get('/uangkas',function()
-{
-    return view('dashboards.uang_kas.index_uang',[
-        'page' => 'Uang Kas'
-    ]);
-});
+Route::resource('/uangkas', UangController::class);
 
 Route::get('/laporan',function()
 {
