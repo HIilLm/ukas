@@ -15,8 +15,7 @@
                         <div class="mb-3">
                             <label for="create_kelas" class="form-label">Nama Kelas</label>
                             <input type="text" required name="nama_kelas" class="form-control"
-                                @error('kelas') is-invalid @enderror" id="create_kelas"
-                                value="{{ old('kelas') }}">
+                                @error('kelas') is-invalid @enderror" id="create_kelas" value="{{ old('kelas') }}">
                             @error('kelas')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -45,13 +44,12 @@
                 </div>
                 <div class="modal-body">
                     <form method="POST" id="update">
-                        @method("PUT")
+                        @method('PUT')
                         @csrf
                         <div class="mb-3">
                             <label for="edit_kelas" class="form-label">Nama Kelas</label>
                             <input type="text" required name="nama_kelas" class="form-control"
-                                @error('kelas') is-invalid @enderror" id="edit_kelas"
-                                value="{{ old('kelas') }}">
+                                @error('kelas') is-invalid @enderror" id="edit_kelas" value="{{ old('kelas') }}">
                             @error('kelas')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -63,7 +61,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save changes</button>
-                </form>
+                    </form>
                 </div>
             </div>
         </div>
@@ -90,38 +88,42 @@
                             </thead>
                             <tbody id="images">
                                 @foreach ($kelas as $item)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->nama_kelas }}</td>
-                                    <td style="">
-                                        <div class="dropdown dropright">
-                                            <button class="btn btn-secondary" type="button" id="dropdownMenuButton"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </button>
-                                            <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
-                                                <li><a href="{{ route("kelas.show", ['kela' => $item->id]) }}" class="dropdown-item text-dark">View</a>
-                                                    {{-- hrefnya perkelas  /detail/kelas   contoh = /detail/12RPL1 --}}
-                                                <li>
-                                                    <a class="dropdown-item text-dark" data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModalCenter1" onclick="sendData({{ $item }})" style="cursor: pointer">Edit</a>
-                                                </li>
-                                                {{-- [{{ $item->id }}, '{{ $item->nama_kelas }}'] --}}
-                                                <li>
-                                                    <form id="form-delete{{ $item->id }}"
-                                                            action="{{ route("kelas.destroy", ["kela" => $item->id]) }}"
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->nama_kelas }}</td>
+                                        <td style="">
+                                            <div class="dropdown dropright">
+                                                <button class="btn btn-secondary" type="button" id="dropdownMenuButton"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
+                                                    <li><a href="{{ route('kelas.show', ['kela' => $item->id]) }}"
+                                                            class="dropdown-item text-dark">View</a>
+                                                        {{-- hrefnya perkelas  /detail/kelas   contoh = /detail/12RPL1 --}}
+                                                    <li>
+                                                        <a class="dropdown-item text-dark" data-bs-toggle="modal"
+                                                            data-bs-target="#exampleModalCenter1"
+                                                            onclick="sendData({{ $item }})"
+                                                            style="cursor: pointer">Edit</a>
+                                                    </li>
+                                                    {{-- [{{ $item->id }}, '{{ $item->nama_kelas }}'] --}}
+                                                    <li>
+                                                        <form id="form-delete{{ $item->id }}"
+                                                            action="{{ route('kelas.destroy', ['kela' => $item->id]) }}"
                                                             method="post" style="display: none">
                                                             @csrf
-                                                            @method("delete")
+                                                            @method('delete')
                                                         </form>
-                                                    <a class="dropdown-item text-dark" style="cursor: pointer" onclick="what({{ $item->id }})">
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
+                                                        <a class="dropdown-item text-dark" style="cursor: pointer"
+                                                            onclick="what({{ $item->id }})">
+                                                            Delete
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                             <tfoot>
@@ -141,7 +143,8 @@
 @section('js')
     <script>
         var table = $('#logo-table').DataTable();
-        function sendData(data){
+
+        function sendData(data) {
             data = Object.values(data);
             $("#update").attr("action", "/kelas/perbarui/" + data[0]);
             $("#edit_kelas").attr("value", data[1]);

@@ -86,7 +86,7 @@ Route::get('/laporan',function()
     ]);
 });
 
-// Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/',function()
     {
     // return abort(403);
@@ -103,4 +103,4 @@ Route::get('/laporan',function()
     Route::put('/kelas/perbarui/{id}', [KelasController::class, "perbarui"]);
     Route::post('/kelas/bendahara', [KelasController::class, "bendahara"]);
     Route::delete('/kelas/siswa/{id}', [KelasController::class, "hapus_siswa"])->name("siswa.delete");
-// });
+});

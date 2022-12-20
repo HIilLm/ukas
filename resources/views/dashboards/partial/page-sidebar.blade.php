@@ -4,7 +4,7 @@
             <a href="/"><i data-feather="airplay"></i>Dashboard</a>
         </li>
 
-        {{-- @can('siswa')
+        @can('siswa')
         <li class="{{ $page === 'Uang Kas' ? 'active-page' : '' }}">
             <a href="/uangkas"><i data-feather="dollar-sign"></i>Uang Kas</a>
         </li>
@@ -12,9 +12,9 @@
         <li class="{{ $page === 'Pengeluaran' ? 'active-page' : '' }}">
             <a href="/pengeluaran"><i data-feather="credit-card"></i>Pengeluaran</a>
         </li>
-        @endcan --}}
+        @endcan
 
-        {{-- @can('bendahara') --}}
+        @can('bendahara')
         {{-- BENDAHARA PAGE?? --}}
         <li class="{{ $page === 'Uang Kas' ? 'active-page' : '' }}">
             <a href="/uangkas"><i data-feather="dollar-sign"></i>Uang Kas</a>
@@ -40,10 +40,10 @@
         </li>
         {{-- BENDAHARA PAGES --}}
 
-        {{-- @endcan --}}
+        @endcan
 
 
-        {{-- @can('admin') --}}
+        @can('admin')
 
         {{-- ADMIN PAGES --}}
         <li
@@ -56,7 +56,7 @@
         </li>
         {{-- ADMIN PAGES --}}
 
-        {{-- @endcan --}}
+        @endcan
 
 
     </ul>

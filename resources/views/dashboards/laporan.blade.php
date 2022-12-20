@@ -15,12 +15,21 @@
                                     <label for="jenis_kelamin" class="form-label">
                                         <h6>Pilih Bulan Pembayaran</h6>
                                     </label>
-                                    <select class="form-select @error('jenis_kelamin') is-invalid @enderror"
+                                    <div class="form-floating">
+                                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                          <option selected>Open this select menu</option>
+                                          <option value="1">One</option>
+                                          <option value="2">Two</option>
+                                          <option value="3">Three</option>
+                                        </select>
+                                        <label for="floatingSelect">Search</label>
+                                      </div>
+                                    {{-- <select class="form-select @error('jenis_kelamin') is-invalid @enderror"
                                         aria-label="Default select example">
                                         <option selected>Pilih Laporan Bulan Pembayaran</option>
                                         <option value="1">FEBRUARI | 2022 | Rp. 5,000</option>
                                         <option value="2">BULAN | TAHUN | NOMINAL</option>
-                                    </select>
+                                    </select> --}}
                                     @error('jenis_kelamin')
                                         <div class="invalid-feedback">
                                             {{ $message }}

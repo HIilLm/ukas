@@ -203,8 +203,14 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Detail Kelas {{ $kelas->nama_kelas }}</h5>
-                        <a href="#" class="btn btn-primary mb-3" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">Tambah Siswa</a> {{-- Berupa modal --}}
+                        <div class="row">
+                            <div class="col">
+                                <a href="#" class="btn btn-primary mb-3 me-2" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">Tambah Siswa</a> {{-- Berupa modal --}}
+                                <a href="" class="btn btn-danger mb-3">Export</a> {{-- ONLY ADMIN --}}
+                                {{-- <i data-feather="file-text"></i> --}}
+                            </div>
+                        </div>
                         <table id="logo-table" class="display"
                             style="table-layout:fixed;
                             width:100%;">
@@ -258,8 +264,13 @@
                                                 </button>
                                                 <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
                                                     <li><a class="dropdown-item text-dark" data-bs-toggle="modal"
+<<<<<<< HEAD
+                                                            data-bs-target="#exampleModal1"
+                                                            style="cursor: pointer">Edit</a> {{-- Berupa Modal --}}
+=======
                                                             data-bs-target="#exampleModal1" style="cursor: pointer"
                                                             onclick="sendData()">Edit</a> {{-- Berupa Modal --}}
+>>>>>>> b349506e6aef4def5334d691ebfb080a9252ca4f
                                                     </li>
                                                     <li>
                                                         <form id="form-delete{{ $item->id }}"
