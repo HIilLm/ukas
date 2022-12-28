@@ -34,7 +34,7 @@
         class="{{ $page === 'Kelas Bendahara' ? 'active-page' : '' }} ">
         <a href="#"><i data-feather="briefcase"></i>Bendahara<i class="fas fa-chevron-right dropdown-icon"></i></a>
         <ul>
-            <li><a href="/bendahara/kelas" class="{{ $page === 'Kelas Bendahara' ? 'active' : '' }}"><i
+            <li><a href="/kelas" class="{{ $page === 'Kelas Bendahara' ? 'active' : '' }}"><i
                 class="far fa-square"></i>Kelas</a></li>
             </ul>
         </li>
