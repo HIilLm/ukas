@@ -25,10 +25,11 @@ class CreatePembayaranTable extends Migration
                     ->onUpdate('cascade');
             $table->integer('tahun');
             $table->integer('byr_perminggu');
-            $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
+            $table->integer('total');
+            // $table->bigInteger('user_id')->unsigned();
+            // $table->foreign('user_id')->references('id')->on('users')
+            //         ->onDelete('cascade')
+            //         ->onUpdate('cascade');
             $table->timestamps();
         });
     }

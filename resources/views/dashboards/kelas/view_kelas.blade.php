@@ -264,13 +264,8 @@
                                                 </button>
                                                 <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
                                                     <li><a class="dropdown-item text-dark" data-bs-toggle="modal"
-<<<<<<< HEAD
                                                             data-bs-target="#exampleModal1"
                                                             style="cursor: pointer">Edit</a> {{-- Berupa Modal --}}
-=======
-                                                            data-bs-target="#exampleModal1" style="cursor: pointer"
-                                                            onclick="sendData()">Edit</a> {{-- Berupa Modal --}}
->>>>>>> b349506e6aef4def5334d691ebfb080a9252ca4f
                                                     </li>
                                                     <li>
                                                         <form id="form-delete{{ $item->id }}"

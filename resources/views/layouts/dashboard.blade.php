@@ -31,7 +31,6 @@
     <link href="{{ asset('/assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/plugins/font-awesome/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/plugins/perfectscroll/perfect-scrollbar.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/plugins/apexcharts/apexcharts.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/plugins/DataTables/datatables.min.css') }}" rel="stylesheet">
     {{-- <link href="{{ asset('/css/customcss.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -50,10 +49,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.10.2/viewer.js"
     integrity="sha512-taR40V17AK2+3RjqzCYkczb0/hTHuQCid0kBs0I2g6DqkFjkTcAIpsa+4PzGuWcRica2AOZQmz4pNPj4InFR8A=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <!-- include summernote css/js -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     @yield('css')
 </head>
 
@@ -83,7 +78,6 @@
     <script src="{{ asset('/assets/js/main.min.js') }}"></script>
     <script src="{{ asset('/assets/js/pages/dashboard.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript" src="{{ asset('js/reorder.js') }}"></script>
     <script src="{{ asset('/assets/js/pages/datatables.js') }}"></script>
     <script src="{{ asset('/assets/plugins/DataTables/datatables.min.js') }}"></script>
 
