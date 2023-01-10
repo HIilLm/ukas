@@ -4,11 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
-<<<<<<< HEAD
 use App\Http\Controllers\UangController;
-=======
 use App\Http\Controllers\PembayaranController;
->>>>>>> c714f1ba5cdc5e4c01a58473aa8bbdb5ed6838a0
 
 /*
 |--------------------------------------------------------------------------
