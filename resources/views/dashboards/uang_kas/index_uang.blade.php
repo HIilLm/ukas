@@ -170,13 +170,13 @@
 
 
             <div class="row">
-                @foreach ($ukas as $item)
+                {{-- @foreach ($ukas as $item) --}}
                 <div class="col-md-5 col-xl-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $item->bulan }}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">{{ $item->tahun }}</h6>
-                            <p class="card-text">Rp. {{ $item->bayar }} / minggu
+                            <h5 class="card-title">Januari</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">2015</h6>
+                            <p class="card-text">Rp. 15.000 / minggu
                                 <br>
                                 Total Uang Kas Bulan Ini:
                             <p class="btn btn-warning" style="cursor: default">
@@ -192,7 +192,7 @@
                     </div>
 
                 </div>
-                @endforeach
+                {{-- @endforeach --}}
             </div>
         </div>
     @endsection

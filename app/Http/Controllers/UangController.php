@@ -16,7 +16,7 @@ class UangController extends Controller
     {
         return view('dashboards.uang_kas.index_uang',[
             'page' => 'Uang Kas',
-            "ukas" => Uang::all()
+            // "ukas" => Uang::all()
         ]);
     }
 
