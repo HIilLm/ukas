@@ -147,7 +147,7 @@
                                 <input type="number" min="1" name="byr_perminggu" class="form-control"
                                     aria-label="Amount (to the nearest dollar)" @error('bayar') is-invalid @enderror"
                                     id="bayar" value="{{ old('bayar') }}">
-                                {{-- <span class="input-group-text">.00</span> --}}
+                                {{-- <span class="input-group-text">.00</span> k--}}
                                 @error('bayar')
                                     <div class="invalid-feedback">
                                         {{ $message }}
