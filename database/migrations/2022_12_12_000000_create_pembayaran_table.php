@@ -15,6 +15,8 @@ class CreatePembayaranTable extends Migration
     {
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->text('desk')->nullable();
             $table->bigInteger('kelas_id')->unsigned();
             $table->foreign('kelas_id')->references('id')->on('kelas')
                     ->onDelete('cascade')
@@ -25,7 +27,7 @@ class CreatePembayaranTable extends Migration
                     ->onUpdate('cascade');
             $table->integer('tahun');
             $table->integer('byr_perminggu');
-            $table->integer('total');
+            $table->integer('total')->nullable();
             // $table->bigInteger('user_id')->unsigned();
             // $table->foreign('user_id')->references('id')->on('users')
             //         ->onDelete('cascade')

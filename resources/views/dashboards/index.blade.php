@@ -11,8 +11,8 @@
                             <form action="/admin" method="POST"id="admin-pass">
                                 @method("Put")
                                 @csrf
-                                <h4>ELang Pandi</h4>
-                                <h6>NISN : 0009123321</h6>
+                                <h4>{{ auth()->user()->name }}</h4>
+                                <h6>NISN : {{ auth()->user()->nisn }}</h6>
                                 <div class="divider"></div>
                                 <input type="hidden"
                                 {{-- value="{{ auth()->user()->id }}" --}}

@@ -9,27 +9,38 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{" method="POST">
+                    <form action="{{ route('uangkas.store') }}" method="POST">
                         @csrf
+                        <div class="mb-3">
+                            <label for="nama" class="form-label">Nama Pembayaran</label>
+                            <input type="number" min="{{ date('Y') -2 }}"name="nama"
+                                class="form-control @error('nama') is-invalid @enderror" id="nama"
+                                value="{{ old('nama') }}">
+                            @error('nama')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="bulan" class="form-label">Bulan</label>
                                     <select name="bulan" class="form-control @error('bulan') is-invalid @enderror"
-                                        id="bulan" aria-label="Default select example">
+                                        id="id_bulan" aria-label="Default select example">
                                         <option selected value="">Pilih Bulan</option>
-                                        <option value="Januari">Januari</option>
-                                        <option value="Februari">Februari</option>
-                                        <option value="Maret">Maret</option>
-                                        <option value="April">April</option>
-                                        <option value="Mei">Mei</option>
-                                        <option value="Juni">Juni</option>
-                                        <option value="Juli">Juli</option>
-                                        <option value="Agustus">Agustus</option>
-                                        <option value="September">September</option>
-                                        <option value="Oktober">Oktober</option>
-                                        <option value="November">November</option>
-                                        <option value="Desember">Desember</option>
+                                        <option value="1">Januari</option>
+                                        <option value="2">Februari</option>
+                                        <option value="3">Maret</option>
+                                        <option value="4">April</option>
+                                        <option value="5">Mei</option>
+                                        <option value="6">Juni</option>
+                                        <option value="7">Juli</option>
+                                        <option value="8">Agustus</option>
+                                        <option value="9">September</option>
+                                        <option value="10">Oktober</option>
+                                        <option value="11">November</option>
+                                        <option value="12">Desember</option>
                                     </select>
                                     @error('bulan')
                                         <div class="invalid-feedback">
@@ -56,7 +67,7 @@
                             <label for="bayar" class="form-label">Pembayaran Perminggu</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Rp.</span>
-                                <input type="number" min="1" name="bayar" class="form-control"
+                                <input type="number" min="1" name="byr_perminggu" class="form-control"
                                     aria-label="Amount (to the nearest dollar)" @error('bayar') is-invalid @enderror"
                                     id="bayar" value="{{ old('bayar') }}">
                                 {{-- <span class="input-group-text">.00</span> --}}
@@ -67,10 +78,20 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <label for="deskripsi" class="form-label">Tahun</label>
+                            <textarea name="deskripsi" class="form-control" id="deskripsi" cols="30" rows="10"></textarea>
+                            @error('tahun')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <input type="hidden" name="id_kelas" value="1">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Tambah</button>
+                    <button type="submit" class="btn btn-primary">Tambah</button>
                     </form>
                 </div>
             </div>
