@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('nisn')->nullable();
             $table->integer('absen')->nullable();
-            $table->bigInteger('kelas_id')->unsigned();
+            $table->bigInteger('kelas_id')->unsigned()->nullable();
             $table->foreign('kelas_id')->references('id')->on('kelas')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');

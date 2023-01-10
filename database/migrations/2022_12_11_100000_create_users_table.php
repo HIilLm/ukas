@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePembayaranTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,23 @@ class CreatePembayaranTable extends Migration
      */
     public function up()
     {
-        Schema::create('pembayaran', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('kelas_id')->unsigned();
+            $table->string('name');
+            $table->string('nisn')->nullable();
+            $table->integer('absen')->nullable();
+            $table->bigInteger('kelas_id')->unsigned()->nullable();
             $table->foreign('kelas_id')->references('id')->on('kelas')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
-            $table->bigInteger('bulan_id')->unsigned();
-            $table->foreign('bulan_id')->references('id')->on('bulan')
+            $table->bigInteger('role_id')->unsigned();
+            $table->foreign('role_id')->references('id')->on('role')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
-            $table->integer('tahun');
-            $table->integer('byr_perminggu');
-            $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -40,6 +41,6 @@ class CreatePembayaranTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pembayaran');
+        Schema::dropIfExists('users');
     }
 }
