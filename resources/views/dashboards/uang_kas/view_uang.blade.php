@@ -37,8 +37,8 @@
             <div class="row">
                 <div class="card">
                     <div class="card-body">
-                        <h3>Detail Bulan Pembayaran : Oktober 2022 {{-- Bulan --}} </h3>
-                        <h4 class="mb-3">Rp. 5,000 / minggu</h4>
+                        <h3>Detail Bulan Pembayaran : {{ $pembayaran->bulan->bulan }} {{ $pembayaran->tahun }} {{-- Bulan --}} </h3>
+                        <h4 class="mb-3">Rp. {{ $pembayaran->byr_perminggu }} / minggu</h4>
                         {{-- <a href="" class="btn btn-primary mb-3 mt-2">Create</a> --}}
                         <table id="logo-table" class="display"
                             style="table-layout:fixed;
@@ -56,28 +56,43 @@
                                 </tr>
                             </thead>
                             <tbody id="images">
-                                <tr>
-                                    <td>
-                                        27
-                                    </td>
-                                    <td>
-                                        Elang Pandi
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal">
-                                            0
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <-- </td>
-                                    <td>
-                                        <-- </td>
-                                    <td>
-                                        <-- </td>
-                                    <td>
-                                        <-- </td>
-                                </tr>
+                                @foreach ($siswa as $item)
+                                    <tr>
+                                        <td>{{ $item->siswa->absen }}</td>
+                                        <td>{{ $item->siswa->name }}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal">
+                                                0
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal">
+                                                0
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal">
+                                                0
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal">
+                                                0
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal">
+                                                0
+                                            </button>
+                                        </td>
+
+                                    </tr>
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>

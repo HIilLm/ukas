@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Bulan;
 use App\Models\Pembayaran;
+use App\Models\BayarMinggu;
 use Illuminate\Http\Request;
 
 class PembayaranController extends Controller
@@ -15,7 +18,9 @@ class PembayaranController extends Controller
     public function index()
     {
         return view('dashboards.uang_kas.index_uang',[
-            'page' => 'Uang Kas'
+            'page' => 'Uang Kas',
+            'pembayaran' => Pembayaran::where('kelas_id', auth()->user()->kelas_id)->get(),
+            'bulan' => Bulan::all()
         ]);
     }
 
@@ -39,11 +44,18 @@ class PembayaranController extends Controller
     {
         $validated = $request->validate([
             "nama" => "required",
-            "id_bulan" => "required",
+            "bulan_id" => "required",
             "tahun" => "required",
             "byr_perminggu" => "required",
+            "deskripsi" => "min:0",
+            "kelas_id" => "required",
         ]);
-        Pembayaran::create($validated);
+        $validated['total'] = 0;
+        $bayar = Pembayaran::create($validated);
+        $siswa = User::where('kelas_id', $bayar["kelas_id"])->get();
+        foreach ($siswa as $value) {
+            BayarMinggu::create(["pembayaran_id" => $bayar["id"], "kelas_id" => $bayar["kelas_id"], "user_id" => $value->id]);
+        }
         return redirect()->back();
     }
 
@@ -55,7 +67,11 @@ class PembayaranController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('dashboards.uang_kas.view_uang', [
+            'page' => 'Uang Kas',
+            'pembayaran' => Pembayaran::find($id),
+            'siswa'=> BayarMinggu::where('pembayaran_id ', $id)->get()
+        ]);
     }
 
     /**

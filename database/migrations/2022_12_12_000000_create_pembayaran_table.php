@@ -16,7 +16,7 @@ class CreatePembayaranTable extends Migration
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->text('desk')->nullable();
+            $table->text('deskripsi')->nullable();
             $table->bigInteger('kelas_id')->unsigned();
             $table->foreign('kelas_id')->references('id')->on('kelas')
                     ->onDelete('cascade')
