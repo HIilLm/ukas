@@ -91,7 +91,7 @@
         <div class="main-wrapper">
             <div class="row">
                 <div class="col-10">
-                    <h2>Uang Kas Kelas 12 RPL 1</h2>
+                    <h2>Uang Kas Kelas {{ auth()->user()->kelas->nama_kelas }}</h2>
                     <h4 class="mb-3">Pilih Bulan Pembayaran</h4>
                 </div>
                 <div class="col-2">

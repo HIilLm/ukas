@@ -87,7 +87,7 @@ Route::get('/laporan',function()
     ]);
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['bendahara','admin'])->group(function () {
     Route::get('/',function()
     {
     // return abort(403);
@@ -109,4 +109,6 @@ Route::middleware(['auth'])->group(function () {
 
     //route pembayaran
     Route::resource('/uangkas', PembayaranController::class);
+    Route::post('/ukas/bayar', [PembayaranController::class, 'bayarminggu'])->name("uangkas.minggu");
+    // Route::post('/uangkas/{id}/bayar', [PembayaranController::class, "bayar_minggu"])->name("uangkas.minggu");
 });
