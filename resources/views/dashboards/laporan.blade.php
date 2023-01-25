@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="card-title">Laporan Kas Kelas 12 RPL 1</h2>
+                        <h2 class="card-title">Laporan Kas Kelas {{ auth()->user()->kelas->nama_kelas }}</h2>
                         <div class="container">
                             <div class="row">
 

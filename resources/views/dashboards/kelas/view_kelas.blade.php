@@ -207,8 +207,7 @@
                             <div class="col">
                                 <a href="#" class="btn btn-primary mb-3 me-2" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">Tambah Siswa</a> {{-- Berupa modal --}}
-                                <a href="" class="btn btn-danger mb-3">Export</a> {{-- ONLY ADMIN --}}
-                                {{-- <i data-feather="file-text"></i> --}}
+                                <a href="" class="btn btn-danger mb-3"><i data-feather="file-text"></i> <span style="font-size: 14px; font-weight:400">Export</span></a> {{-- ONLY ADMIN --}}
                             </div>
                         </div>
                         <table id="logo-table" class="display"

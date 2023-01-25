@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\UangController;
@@ -88,15 +89,7 @@ Route::get('/laporan',function()
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/',function()
-    {
-    // return abort(403);
-    // return abort(500);
-    return view('dashboards.index',[
-        'page' => 'Dashboard'
-    ]);
-
-    });
+    Route::get('/', [HomepageController::class, 'dashboard'])->name("dashboard.index");
     Route::post('/',[AuthController::class, "logout"])->name("logout");
 
     //route kelas
