@@ -107,7 +107,8 @@ class PembayaranController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Pembayaran::destroy($id);
+        return back();
     }
 
     public function bayarminggu(Request $request)

@@ -371,24 +371,5 @@
             }
 
         }
-        // $(".check-box").on("click", function(event) {
-        //     event.preventDefault();
-        //     var url = $(this).attr("href"),
-        //         appendedContainer = $(".appendedContainer");
-
-        //     $.ajax({
-        //         url: url,
-        //         type: 'get',
-        //         complete: function(qXHR, textStatus) {
-        //             if (textStatus === 'success') {
-        //                 var data = qXHR.responseText
-        //                 appendedContainer.hide();
-        //                 appendedContainer.append(data);
-        //                 appendedContainer.fadeIn();
-        //             }
-        //         }
-        //     });
-
-        // });
     </script>
 @endsection

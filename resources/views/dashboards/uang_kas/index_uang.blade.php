@@ -113,9 +113,15 @@
                                     Rp. {{ $item->total }}
                                 </p>
                                 <br>
+                                <form id="form-delete{{ $item->id }}"
+                                    action="{{ route('uangkas.destroy', ['uangka' => $item->id]) }}"
+                                    method="post" style="display: none">
+                                    @method('delete')
+                                    @csrf
+                                </form>
                                 <a href="{{ route('uangkas.show',['uangka' => $item->id]) }}" {{-- /detail/februari --}} class="btn btn-primary btn-sm"><i
                                         data-feather="eye"></i></a>
-                                <span><a type="button" class="btn btn-danger btn-sm"><i data-feather="trash-2"></i></a></span>
+                                <span><a style="cursor: pointer" class="btn btn-danger btn-sm"><i data-feather="trash-2"></i></a></span>
                                 </p>
                             </div>
                         </div>
