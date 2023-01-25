@@ -67,10 +67,12 @@ class PembayaranController extends Controller
      */
     public function show($id)
     {
+        $siswa = BayarMinggu::where('pembayaran_id', $id)->get();
+        $pembayaran = Pembayaran::find($id);
         return view('dashboards.uang_kas.view_uang', [
             'page' => 'Uang Kas',
-            'pembayaran' => Pembayaran::find($id),
-            'siswa'=> BayarMinggu::where('pembayaran_id ', $id)->get()
+            'pembayaran' => $pembayaran,
+            'siswa'=> $siswa
         ]);
     }
 
@@ -106,5 +108,11 @@ class PembayaranController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function bayarminggu(Request $request)
+    {
+        return "lol";
+        dd($request);
     }
 }

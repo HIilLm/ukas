@@ -9,10 +9,11 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="{" method="POST">
+            <form action="{{ route("uangkas.minggu") }}" method="POST">
+
                 @csrf
                 <div class="mb-3">
-                    <label for="bayar" class="form-label">Minggu Ke-1</label>
+                    <label for="bayar" class="label-bayar form-label">Minggu Ke-1</label>
                     <input type="number" min="1" name="bayar"
                         class="form-control @error('bayar') is-invalid @enderror" id="bayar"
                         value="{{ old('bayar') }}" >
@@ -21,11 +22,12 @@
                             {{ $message }}
                         </div>
                     @enderror
+                    <input type="hidden" name="id_minggu" value="" id="minggu">
                 </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
         </form>
         </div>
       </div>
@@ -47,11 +49,11 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Minggu ke 1</th>
-                                    <th>Minggu ke 2</th>
-                                    <th>Minggu ke 3</th>
-                                    <th>Minggu ke 4</th>
-                                    <th>Minggu ke 5</th>
+                                    <th class="mng-1">Minggu Ke 1</th>
+                                    <th class="mng-2">Minggu Ke 2</th>
+                                    <th class="mng-3">Minggu Ke 3</th>
+                                    <th class="mng-4">Minggu Ke 4</th>
+                                    <th class="mng-5">Minggu Ke 5</th>
                                     {{-- <th>option</th> --}}
                                 </tr>
                             </thead>
@@ -59,35 +61,35 @@
                                 @foreach ($siswa as $item)
                                     <tr>
                                         <td>{{ $item->siswa->absen }}</td>
-                                        <td>{{ $item->siswa->name }}</td>
+                                        <td class="data-name">{{ $item->siswa->name }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">
-                                                0
+                                            <button type="button" class="btn btn-primary btn-action" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" data-minggu="mng-1">
+                                                {{ $item->mng_1 }}
                                             </button>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">
-                                                0
+                                            <button type="button" class="btn btn-primary btn-action" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" data-minggu="mng-2">
+                                                {{ $item->mng_2 }}
                                             </button>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">
-                                                0
+                                            <button type="button" class="btn btn-primary btn-action" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" data-minggu="mng-3">
+                                                {{ $item->mng_3 }}
                                             </button>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">
-                                                0
+                                            <button type="button" class="btn btn-primary btn-action" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" data-minggu="mng-4">
+                                                {{ $item->mng_4 }}
                                             </button>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">
-                                                0
+                                            <button type="button" class="btn btn-primary btn-action" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" data-minggu="mng-5">
+                                                {{ $item->mng_5 }}
                                             </button>
                                         </td>
 
@@ -127,8 +129,23 @@
                     });
                 }
             })
+
+            $('.btn-action').click(function(){
+                const minggu = $(this).data('minggu')
+                const el = $(`th.${minggu}`)
+                let text = $(el).text().split(' ')
+                text = `${text[0]} ${text[1]}-${text[2]}`
+                const nama = $(this).parent().parent().find('td.data-name').text()
+
+                $('.modal-title').html(`Ubah ${text} : ${nama}`)
+                $('.label-bayar').html(text)
+                $('#bayar').attr('name', el);
+                $('#minggu').attr('value', el);
+
         });
 
         var table = $('#logo-table').DataTable({});
+
+    })
     </script>
 @endsection

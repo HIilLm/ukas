@@ -27,11 +27,11 @@ class CreateBayarMingguTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
-            $table->integer('mng_1')->nullable();
-            $table->integer('mng_2')->nullable();
-            $table->integer('mng_3')->nullable();
-            $table->integer('mng_4')->nullable();
-            $table->integer('mng_5')->nullable();
+            $table->integer('mng_1')->default('0');
+            $table->integer('mng_2')->default('0');
+            $table->integer('mng_3')->default('0');
+            $table->integer('mng_4')->default('0');
+            $table->integer('mng_5')->default('0');
             $table->timestamps();
         });
     }
