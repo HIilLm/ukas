@@ -31,10 +31,10 @@
 
         {{-- BENDAHARA PAGES --}}
         <li
-        class="{{ $page === 'Kelas Bendahara' ? 'active-page' : '' }} ">
+        class="{{ $page === 'Kelas' ? 'active-page' : '' }} ">
         <a href="#"><i data-feather="briefcase"></i>Bendahara<i class="fas fa-chevron-right dropdown-icon"></i></a>
         <ul>
-            <li><a href="/kelas" class="{{ $page === 'Kelas Bendahara' ? 'active' : '' }}"><i
+            <li><a href="/kelas/{{ auth()->user()->kelas_id }}" class="{{ $page === 'Kelas' ? 'active' : '' }}"><i
                 class="far fa-square"></i>Kelas</a></li>
             </ul>
         </li>

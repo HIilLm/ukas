@@ -10,27 +10,49 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST">
+                    <form action="{{ route('pengeluaran.store') }}" method="POST">
                         @csrf
-                        <div class="mb-3">
-                            <label for="pengeluaran" class="form-label">Jumlah Pengeluaran</label>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text">Rp.</span>
-                                <input type="number" min="1" name="pengeluaran" class="form-control"
-                                    aria-label="Amount (to the nearest dollar)" @error('pengeluaran') is-invalid @enderror"
-                                    id="pengeluaran" value="{{ old('pengeluaran') }}">
-                                {{-- <span class="input-group-text">.00</span> --}}
-                                @error('bayar')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="pengeluaran" class="form-label">Jumlah Pengeluaran</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Rp.</span>
+                                        <input type="number" min="1000" name="pengeluaran"
+                                            class="form-control @error('pengeluaran') is-invalid @enderror"
+                                            aria-label="Amount (to the nearest dollar)" id="pengeluaran"
+                                            value="{{ old('pengeluaran') }}">
+                                        {{-- <span class="input-group-text">.00</span> --}}
+                                        @error('pengeluaran')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
-                                @enderror
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="tanggal" class="form-label">Tanggal Pengeluaran</label>
+                                    <div class="input-group mb-3">
+                                        <input type="date" name="tanggal"
+                                            class="form-control
+                                            @error('tanggal') is-invalid @enderror"
+                                            id="tanggal" value="{{ old('tanggal') }}">
+                                        {{-- <span class="input-group-text">.00</span> --}}
+                                        @error('tanggal')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="keterangan" id="keterangan" class="form-label is-invalid">Keterangan</label>
-                            <textarea type="text" name="keterangan" class="form-control text-white @error('keterangan') is-invalid @enderror"
-                                id="keterangan" rows="5">{{ old('keterangan') }}</textarea>
+                            <textarea type="text" name="keterangan" class="form-control @error('keterangan') is-invalid @enderror"
+                                id="keterangan" rows="5"></textarea>
                             @error('keterangan')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -40,7 +62,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                     </form>
                 </div>
             </div>
@@ -57,27 +79,48 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST">
+                    <form id="update" method="POST">
                         @csrf
-                        <div class="mb-3">
-                            <label for="pengeluaran" class="form-label">Jumlah Pengeluaran</label>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text">Rp.</span>
-                                <input type="number" min="1" name="pengeluaran" class="form-control" value="50000"
-                                    aria-label="Amount (to the nearest dollar)" @error('pengeluaran') is-invalid @enderror"
-                                    id="pengeluaran" value="{{ old('pengeluaran') }}">
-                                {{-- <span class="input-group-text">.00</span> --}}
-                                @error('bayar')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
+                        @method("put")
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="pengeluaran" class="form-label">Jumlah Pengeluaran</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Rp.</span>
+                                        <input type="number" min="1000" name="pengeluaran" class="form-control"
+                                            aria-label="Amount (to the nearest dollar)"
+                                            @error('pengeluaran') is-invalid @enderror" id="edit_pengeluaran"
+                                            >
+                                        @error('pengeluaran')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
-                                @enderror
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="tanggal" class="form-label">Tanggal Pengeluaran</label>
+                                    <div class="input-group mb-3">
+                                        <input type="date" name="tanggal" class="form-control"
+                                            @error('tanggal') is-invalid @enderror" id="edit_tanggal"
+                                            >
+                                        {{-- <span class="input-group-text">.00</span> --}}
+                                        @error('tanggal')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="keterangan" id="keterangan" class="form-label is-invalid">Keterangan</label>
                             <textarea type="text" name="keterangan" class="form-control @error('keterangan') is-invalid @enderror"
-                                id="keterangan" rows="5">Dekorasi Kelas</textarea>
+                                id="edit_keterangan" rows="5"></textarea>
                             @error('keterangan')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -98,9 +141,18 @@
     <div class="page-content">
         <div class="main-wrapper">
             <div class="row">
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $item)
+                                <li>{{ $item }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Pengeluaran Kelas 12 RPL 1</h5>
+                        <h5 class="card-title">Pengeluaran Kelas {{ auth()->user()->kelas->nama_kelas }}</h5>
                         <a href="" class="btn btn-primary mb-3" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">Tambah Pengeluaran</a> {{-- Berupa modal --}}
                         <table id="logo-table" class="display"
@@ -117,44 +169,49 @@
                                 </tr>
                             </thead>
                             <tbody id="images">
-                                <tr>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        Elang Pandi
-                                    </td>
-                                    <td>Dekorasi Kelas</td>
-                                    <td>
-                                        {{ date('D - M / Y') }}
-                                    </td>
-                                    <td>
-                                        Rp. 50,000
-                                    </td>
-                                    <td style="">
-                                        <div class="dropdown dropright">
-                                            <button class="btn btn-secondary" type="button" id="dropdownMenuButton"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </button>
-                                            <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
-                                                <li><a class="dropdown-item text-dark" style="cursor: pointer" data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal2">Edit</a> {{-- Berupa Modal --}}
-                                                </li>
-                                                <li>
-                                                    {{-- <form id="form-delete{{ $p->id }}"
-                                                            action="/admin/opportunity_image/image/{{ $p->id }}"
+                                @foreach ($pengeluaran as $item)
+                                    <tr>
+                                        <td>
+                                            {{ $loop->iteration }}
+                                        </td>
+                                        <td>
+                                            {{ $item->nama }}
+                                        </td>
+                                        <td>{{ $item->keterangan }}</td>
+                                        <td>
+                                            {{ date('d F Y', strtotime($item->tanggal)) }}
+                                        </td>
+                                        <td>
+                                            Rp. {{ $item->pengeluaran }}
+                                        </td>
+                                        <td style="">
+                                            <div class="dropdown dropright">
+                                                <button class="btn btn-secondary" type="button" id="dropdownMenuButton"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
+                                                    <li><a class="dropdown-item text-dark" style="cursor: pointer"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#exampleModal2" onclick="sendData({{ $item }})">Edit</a>
+                                                    </li>
+                                                    <li>
+                                                        <form id="form-delete{{ $item->id }}"
+                                                            action="{{ route('pengeluaran.destroy', ["pengeluaran" => $item->id]) }}"
                                                             method="post" style="display: none">
+                                                            @method("delete")
                                                             @csrf
-                                                        </form> --}}
-                                                    <a class="dropdown-item text-dark" style="cursor: pointer" {{-- onclick="what({{ $p->id }})" --}}>
-                                                        Delete
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
+                                                        </form>
+                                                        <a class="dropdown-item text-dark" style="cursor: pointer"
+                                                             onclick="what({{ $item->id }})" >
+                                                            Delete
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -174,21 +231,16 @@
     </div>
 @endsection
 @section('js')
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
     <script>
-        $(document).ready(function() {
-            var id;
-            $('.editable').each(function() {
-                id = $(this).attr('id');
-                if (id != '') {
-                    $('#' + id).summernote({
-                        height: 120,
-                    });
-                }
-            })
-        });
-
         var table = $('#logo-table').DataTable({});
+
+        function sendData(data) {
+            // console.log(Object.values(data));
+            data = Object.values(data);
+            $("#update").attr("action", "/pengeluaran/" + data[0]);
+            $("#edit_pengeluaran").attr("value", data[4]);
+            $("#edit_tanggal").attr("value", data[5]);
+            $("#edit_keterangan").val(data[3]);
+        }
     </script>
 @endsection

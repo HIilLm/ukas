@@ -207,7 +207,8 @@
                             <div class="col">
                                 <a href="#" class="btn btn-primary mb-3 me-2" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">Tambah Siswa</a> {{-- Berupa modal --}}
-                                <a href="" class="btn btn-danger mb-3"><i data-feather="file-text"></i> <span style="font-size: 14px; font-weight:400">Export</span></a> {{-- ONLY ADMIN --}}
+                                <a href="" class="btn btn-danger mb-3"><i data-feather="file-text"></i> <span
+                                        style="font-size: 14px; font-weight:400">Export</span></a> {{-- ONLY ADMIN --}}
                             </div>
                         </div>
                         <table id="logo-table" class="display"
@@ -218,7 +219,9 @@
                                     <th>No Absen</th>
                                     <th>Nama</th>
                                     <th>NISN</th>
+                                    @can('admin')
                                     <th>Bendahara</th> {{-- Admin Akses --}}
+                                    @endcan
                                     <th>option</th>
                                 </tr>
                             </thead>
@@ -236,24 +239,20 @@
                                         <td>{{ $item->nisn }}</td>
 
                                         {{-- ADMIN ACCESS --}}
-                                        <td>
-                                            <div class="form-check form-switch">
-                                                <label class="form-check-label"
-                                                    for="flexSwitchCheckDefault">Bendahara</label>
-                                                <input class="form-check-input abk{{ $item->id }} switch-box"
-                                                    {{ $bendahara == 2 && $item->role_id != 2 ? 'disabled' : '' }}
-                                                    {{ $item->role_id == 2 ? 'checked' : '' }} type="checkbox"
-                                                    id="checked-{{ $item->id }}"
-                                                    onclick="checking({{ $item->id }})">
-                                            </div>
-                                        </td>
+                                        @can('admin')
+                                            <td>
+                                                <div class="form-check form-switch">
+                                                    <label class="form-check-label"
+                                                        for="flexSwitchCheckDefault">Bendahara</label>
+                                                    <input class="form-check-input abk{{ $item->id }} switch-box"
+                                                        {{ $bendahara == 2 && $item->role_id != 2 ? 'disabled' : '' }}
+                                                        {{ $item->role_id == 2 ? 'checked' : '' }} type="checkbox"
+                                                        id="checked-{{ $item->id }}"
+                                                        onclick="checking({{ $item->id }})">
+                                                </div>
+                                            </td>
+                                        @endcan
                                         {{-- ADMIN ACCESS --}}
-
-                                        {{-- BENDAHARA ACCESS --}}
-                                        {{-- <td>
-                                            {{ decrypt($item->password) }}
-                                        </td> --}}
-                                        {{-- BENDAHARA ACCESS --}}
 
                                         <td style="">
                                             <div class="dropdown dropright">
@@ -262,7 +261,7 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </button>
                                                 <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
-                                                    <li><a class="dropdown-item text-dark" data-bs-toggle="modal"
+                                                    <li><a class="dropdown-item text-dark" data-bs-toggle="modal" onclick="sendData({{ $item }})"
                                                             data-bs-target="#exampleModal1"
                                                             style="cursor: pointer">Edit</a> {{-- Berupa Modal --}}
                                                     </li>
@@ -289,7 +288,9 @@
                                     <th>No Absen</th>
                                     <th>Nama</th>
                                     <th>Nisn</th>
+                                    @can('admin')
                                     <th>Bendahara</th> {{-- Admin Akses --}}
+                                    @endcan
                                     <th>option</th>
                                 </tr>
                             </tfoot>

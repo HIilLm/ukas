@@ -100,14 +100,12 @@
                                                 <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
                                                     <li><a href="{{ route('kelas.show', ['kela' => $item->id]) }}"
                                                             class="dropdown-item text-dark">View</a>
-                                                        {{-- hrefnya perkelas  /detail/kelas   contoh = /detail/12RPL1 --}}
                                                     <li>
                                                         <a class="dropdown-item text-dark" data-bs-toggle="modal"
                                                             data-bs-target="#exampleModalCenter1"
                                                             onclick="sendData({{ $item }})"
                                                             style="cursor: pointer">Edit</a>
                                                     </li>
-                                                    {{-- [{{ $item->id }}, '{{ $item->nama_kelas }}'] --}}
                                                     <li>
                                                         <form id="form-delete{{ $item->id }}"
                                                             action="{{ route('kelas.destroy', ['kela' => $item->id]) }}"

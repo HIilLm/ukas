@@ -111,9 +111,9 @@ class PembayaranController extends Controller
         return back();
     }
 
-    public function bayarminggu(Request $request)
-    {
-        return "lol";
-        dd($request);
-    }
+    // public function bayarminggu(Request $request)
+    // {
+    //     return "lol";
+    //     dd($request);
+    // }
 }
