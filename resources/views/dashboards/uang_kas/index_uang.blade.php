@@ -100,11 +100,15 @@
                 </div>
             </div>
             <div class="row">
+                @empty($pembayaran->first())
+                    <h1>Belum ada</h1>
+                @endempty
                 @foreach ($pembayaran as $item)
                     <div class="col-md-6 col-xl-3">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $item->bulan->bulan }}</h5>
+                                <h3 class="bold">{{ $item->bulan->bulan }}</h3>
+                                <h5 class="mb-3">{{ $item->nama }}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">{{ $item->tahun }}</h6>
                                 <p class="card-text">Rp. {{ $item->byr_perminggu }} / minggu
                                     <br>
@@ -121,7 +125,7 @@
                                 </form>
                                 <a href="{{ route('uangkas.show',['uangka' => $item->id]) }}" {{-- /detail/februari --}} class="btn btn-primary btn-sm"><i
                                         data-feather="eye"></i></a>
-                                <span><a style="cursor: pointer" class="btn btn-danger btn-sm"><i data-feather="trash-2"></i></a></span>
+                                <span><a onclick="what({{ $item->id }})" style="cursor: pointer" href="#" class="btn btn-danger btn-sm"><i data-feather="trash-2"></i></a></span>
                                 </p>
                             </div>
                         </div>

@@ -113,7 +113,6 @@ class PembayaranController extends Controller
 
     public function bayarminggu(Request $request)
     {
-        return "lol";
         dd($request);
     }
 }

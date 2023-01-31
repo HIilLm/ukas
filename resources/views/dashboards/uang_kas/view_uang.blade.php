@@ -61,7 +61,7 @@
                                 @foreach ($siswa as $item)
                                     <tr>
                                         <td>{{ $item->siswa->absen }}</td>
-                                        <td class="data-name">{{ $item->siswa->name }}</td>
+                                        <td class="data-name" data-id="{{ $item->id }}">{{ $item->siswa->name }}</td>
                                         <td>
                                             <button type="button" class="btn btn-primary btn-action" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal" data-minggu="mng-1">
@@ -136,11 +136,12 @@
                 let text = $(el).text().split(' ')
                 text = `${text[0]} ${text[1]}-${text[2]}`
                 const nama = $(this).parent().parent().find('td.data-name').text()
+                const id = $(this).parent().parent().find('td.data-name').data('id')
 
                 $('.modal-title').html(`Ubah ${text} : ${nama}`)
                 $('.label-bayar').html(text)
-                $('#bayar').attr('name', el);
-                $('#minggu').attr('value', el);
+                $('#bayar').attr('name', minggu);
+                $('#minggu').attr('value', id);
 
         });
 

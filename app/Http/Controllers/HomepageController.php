@@ -13,6 +13,7 @@ class HomepageController extends Controller
         $uangkas = Pembayaran::where('kelas_id' , auth()->user()->kelas_id)->get()->sum('total');
         $siswa_kelas = User::where('kelas_id', auth()->user()->kelas_id)->get()->count();
         $page = "Dashboard";
+        // dd($siswa_kelas);
         return view('dashboards.index',compact('uangkas','siswa_kelas','page'));
     }
 }

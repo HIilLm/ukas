@@ -88,21 +88,9 @@ Route::get('/laporan',function()
     ]);
 });
 
-<<<<<<< HEAD
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomepageController::class, 'dashboard'])->name("dashboard.index");
-=======
-Route::middleware(['bendahara','admin'])->group(function () {
-    Route::get('/',function()
-    {
-    // return abort(403);
-    // return abort(500);
-    return view('dashboards.index',[
-        'page' => 'Dashboard'
-    ]);
 
-    });
->>>>>>> 7118b2dba9f24764e5bb508d3e9d79d4b46f8068
     Route::post('/',[AuthController::class, "logout"])->name("logout");
 
     //route kelas
