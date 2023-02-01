@@ -7,6 +7,8 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\UangController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PengeluaranController;
+use App\Models\Pengeluaran;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,12 +46,6 @@ Route::post('/login',[AuthController::class, "authenticate"])->middleware('guest
 //     ]);
 // });
 
-Route::get('/pengeluaran',function()
-{
-    return view('dashboards.pengeluaran',[
-        'page' => 'Pengeluaran'
-    ]);
-});
 
 Route::get('/bendahara',function()
 {
@@ -89,9 +85,15 @@ Route::get('/laporan',function()
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', [HomepageController::class, 'dashboard'])->name("dashboard.index");
 
+    Route::post('/changepass', [HomepageController::class, 'ChangePass'])->name("change.password");
+    Route::get('/', [HomepageController::class, 'dashboard'])->name("dashboard.index");
     Route::post('/',[AuthController::class, "logout"])->name("logout");
+
+    // ROUTE PENGELUARAN
+    Route::resource('/pengeluaran', PengeluaranController::class);
+    // ROUTE PENGELUARAN
+
 
     //route kelas
     Route::resource('/kelas', KelasController::class);
