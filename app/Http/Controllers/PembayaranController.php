@@ -54,7 +54,7 @@ class PembayaranController extends Controller
         $bayar = Pembayaran::create($validated);
         $siswa = User::where('kelas_id', $bayar["kelas_id"])->get();
         foreach ($siswa as $value) {
-            BayarMinggu::create(["pembayaran_id" => $bayar["id"], "kelas_id" => $bayar["kelas_id"], "user_id" => $value->id]);
+            BayarMinggu::create(["pembayaran_id" => $bayar["id"], "kelas_id" => $bayar["kelas_id"], "user_id" => $value->id, "belum_byr" => $bayar['byr_perminggu'] * 5]);
         }
         return redirect()->back();
     }
@@ -113,6 +113,11 @@ class PembayaranController extends Controller
 
     public function bayarminggu(Request $request)
     {
-        dd($request);
+        $byr = BayarMinggu::find($request->id_pembayaran);
+        $validated = $request->validate([
+            'bayar' => 'numeric|max:'.$byr->belum_byr
+        ]);
+        $byr->update(['belum_byr' => $byr->belum_byr - $validated['bayar']]);
+        return back();
     }
 }

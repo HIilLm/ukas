@@ -22,7 +22,7 @@
                             {{ $message }}
                         </div>
                     @enderror
-                    <input type="hidden" name="id_minggu" value="" id="minggu">
+                    <input type="hidden" name="id_pembayaran" value="" id="minggu">
                 </div>
         </div>
         <div class="modal-footer">
@@ -63,32 +63,32 @@
                                         <td>{{ $item->siswa->absen }}</td>
                                         <td class="data-name" data-id="{{ $item->id }}">{{ $item->siswa->name }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-primary btn-action" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-minggu="mng-1">
+                                            <button type="button" class="btn btn-{{ $item->belum_byr <= $pembayaran->byr_perminggu * 4? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" data-minggu="mng-1" {{ $item->belum_byr <= $pembayaran->byr_perminggu * 4? 'disabled': ''}}>
                                                 {{ $item->mng_1 }}
                                             </button>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-primary btn-action" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-minggu="mng-2">
+                                            <button type="button" class="btn btn-{{ $item->belum_byr <= $pembayaran->byr_perminggu * 3? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" data-minggu="mng-2" {{ $item->belum_byr <= $pembayaran->byr_perminggu * 3? 'disabled': ''}}>
                                                 {{ $item->mng_2 }}
                                             </button>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-primary btn-action" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-minggu="mng-3">
+                                            <button type="button" class="btn btn-{{ $item->belum_byr <= $pembayaran->byr_perminggu * 2? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" data-minggu="mng-3" {{ $item->belum_byr <= $pembayaran->byr_perminggu * 2? 'disabled': ''}}>
                                                 {{ $item->mng_3 }}
                                             </button>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-primary btn-action" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-minggu="mng-4">
+                                            <button type="button" class="btn btn-{{ $item->belum_byr <= $pembayaran->byr_perminggu? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" data-minggu="mng-4" {{ $item->belum_byr <= $pembayaran->byr_perminggu ? 'disabled': ''}}>
                                                 {{ $item->mng_4 }}
                                             </button>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-primary btn-action" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-minggu="mng-5">
+                                            <button type="button" class="btn btn-{{ $item->belum_byr == 0 * 4? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" data-minggu="mng-5" {{ $item->belum_byr == 0 ? 'disabled': ''}}>
                                                 {{ $item->mng_5 }}
                                             </button>
                                         </td>
@@ -140,7 +140,7 @@
 
                 $('.modal-title').html(`Ubah ${text} : ${nama}`)
                 $('.label-bayar').html(text)
-                $('#bayar').attr('name', minggu);
+                // $('#bayar').attr('name', minggu);
                 $('#minggu').attr('value', id);
 
         });
