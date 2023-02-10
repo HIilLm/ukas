@@ -14,7 +14,7 @@
                 @csrf
                 <div class="mb-3">
                     <label for="bayar" class="label-bayar form-label">Minggu Ke-1</label>
-                    <input type="number" min="1" name="bayar"
+                    <input type="number" min="1" max="" name="bayar"
                         class="form-control @error('bayar') is-invalid @enderror" id="bayar"
                         value="{{ old('bayar') }}" >
                     @error('bayar')
@@ -63,32 +63,32 @@
                                         <td>{{ $item->siswa->absen }}</td>
                                         <td class="data-name" data-id="{{ $item->id }}">{{ $item->siswa->name }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-{{ $item->belum_byr <= $pembayaran->byr_perminggu * 4? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-minggu="mng-1" {{ $item->belum_byr <= $pembayaran->byr_perminggu * 4? 'disabled': ''}}>
+                                            <button type="button" class="btn btn-{{ $item->mng_1 == $pembayaran->byr_perminggu? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" data-minggu="mng-1" {{ $item->mng_1 == $pembayaran->byr_perminggu? 'disabled': ''}}>
                                                 {{ $item->mng_1 }}
                                             </button>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-{{ $item->belum_byr <= $pembayaran->byr_perminggu * 3? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-minggu="mng-2" {{ $item->belum_byr <= $pembayaran->byr_perminggu * 3? 'disabled': ''}}>
+                                            <button type="button" class="btn btn-{{ $item->mng_2 == $pembayaran->byr_perminggu? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" data-minggu="mng-2" {{ $item->mng_2 == $pembayaran->byr_perminggu? 'disabled': ''}}>
                                                 {{ $item->mng_2 }}
                                             </button>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-{{ $item->belum_byr <= $pembayaran->byr_perminggu * 2? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-minggu="mng-3" {{ $item->belum_byr <= $pembayaran->byr_perminggu * 2? 'disabled': ''}}>
+                                            <button type="button" class="btn btn-{{ $item->mng_3 == $pembayaran->byr_perminggu? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" data-minggu="mng-3" {{ $item->mng_3 == $pembayaran->byr_perminggu? 'disabled': ''}}>
                                                 {{ $item->mng_3 }}
                                             </button>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-{{ $item->belum_byr <= $pembayaran->byr_perminggu? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-minggu="mng-4" {{ $item->belum_byr <= $pembayaran->byr_perminggu ? 'disabled': ''}}>
+                                            <button type="button" class="btn btn-{{ $item->mng_4 == $pembayaran->byr_perminggu? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" data-minggu="mng-4" {{ $item->mng_4 == $pembayaran->byr_perminggu ? 'disabled': ''}}>
                                                 {{ $item->mng_4 }}
                                             </button>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-{{ $item->belum_byr == 0 * 4? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-minggu="mng-5" {{ $item->belum_byr == 0 ? 'disabled': ''}}>
+                                            <button type="button" class="btn btn-{{ $item->mng_5 == $pembayaran->byr_perminggu? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" data-minggu="mng-5" {{ $item->mng_5 == $pembayaran->byr_perminggu ? 'disabled': ''}}>
                                                 {{ $item->mng_5 }}
                                             </button>
                                         </td>
