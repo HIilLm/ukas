@@ -14,7 +14,7 @@
                 @csrf
                 <div class="mb-3">
                     <label for="bayar" class="label-bayar form-label">Minggu Ke-1</label>
-                    <input type="number" min="1" name="bayar"
+                    <input type="number" min="1000" name="bayar"
                         class="form-control @error('bayar') is-invalid @enderror" id="bayar"
                         value="{{ old('bayar') }}" >
                     @error('bayar')
@@ -40,7 +40,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h3>Detail Bulan Pembayaran : {{ $pembayaran->bulan->bulan }} {{ $pembayaran->tahun }} {{-- Bulan --}} </h3>
-                        <h4 class="mb-3">Rp. {{ $pembayaran->byr_perminggu }} / minggu</h4>
+                        <h4 class="mb-3">Rp. {{ number_format($pembayaran->byr_perminggu) }} / minggu</h4>
                         {{-- <a href="" class="btn btn-primary mb-3 mt-2">Create</a> --}}
                         <table id="logo-table" class="display"
                             style="table-layout:fixed;

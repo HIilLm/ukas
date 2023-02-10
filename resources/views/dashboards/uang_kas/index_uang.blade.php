@@ -110,11 +110,11 @@
                                 <h3 class="bold">{{ $item->bulan->bulan }}</h3>
                                 <h5 class="mb-3">{{ $item->nama }}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">{{ $item->tahun }}</h6>
-                                <p class="card-text">Rp. {{ $item->byr_perminggu }} / minggu
+                                <p class="card-text">Rp. {{ number_format($item->byr_perminggu) }} / minggu
                                     <br>
                                     Total Uang Kas Bulan Ini:
                                 <p class="btn btn-warning" style="cursor: default">
-                                    Rp. {{ $item->total }}
+                                    Rp. {{ number_format($item->total) }}
                                 </p>
                                 <br>
                                 <form id="form-delete{{ $item->id }}"

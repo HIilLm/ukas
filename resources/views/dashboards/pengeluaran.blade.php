@@ -153,8 +153,10 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Pengeluaran Kelas {{ auth()->user()->kelas->nama_kelas }}</h5>
+                        @can('bendahara')
                         <a href="" class="btn btn-primary mb-3" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">Tambah Pengeluaran</a> {{-- Berupa modal --}}
+                        @endcan
                         <table id="logo-table" class="display"
                             style="table-layout:fixed;
                             width:100%;">

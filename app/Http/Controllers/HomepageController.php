@@ -19,7 +19,7 @@ class HomepageController extends Controller
         // GENERAL
 
         // BENDAHARA
-        $uangkas = Pembayaran::where('kelas_id' , auth()->user()->kelas_id)->get()->sum('total');
+        $uangkas = Pembayaran::where('kelas_id' , auth()->user()->kelas_id)->get()->sum('total') - Pengeluaran::where('kelas_id', auth()->user()->kelas_id)->get()->sum('pengeluaran');
         $siswa_kelas = User::where('kelas_id', auth()->user()->kelas_id)->get()->count();
         $pengeluaran = Pengeluaran::where('kelas_id', auth()->user()->kelas_id)->get()->sum('pengeluaran');
         // BENDAHARA

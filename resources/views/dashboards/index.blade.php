@@ -65,7 +65,7 @@
                         <h5 class="card-title"><i data-feather="dollar-sign"></i> Pengeluaran</h5>
                         <p>Jumlah Pengeluaran</p>
                         <br>
-                        <h2>RP. {{ $pengeluaran }}</h2>
+                        <h2>RP. {{ number_format($pengeluaran) }}</h2>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                         <h5 class="card-title"><i data-feather="dollar-sign"></i> Uang Kas</h5>
                         <p>Jumlah Uang Kas</p>
                         <br>
-                        <h2>RP. 40000{{ $uangkas }}</h2>
+                        <h2 class="{{ $uangkas < 0 ? "text-danger" : "" }}">RP.{{number_format($uangkas) }}</h2>
                     </div>
                 </div>
             </div>

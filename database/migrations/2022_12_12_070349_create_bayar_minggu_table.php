@@ -28,6 +28,11 @@ class CreateBayarMingguTable extends Migration
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
             $table->bigInteger('belum_byr')->unsigned();
+            $table->integer('mng_1')->default('0');
+            $table->integer('mng_2')->default('0');
+            $table->integer('mng_3')->default('0');
+            $table->integer('mng_4')->default('0');
+            $table->integer('mng_5')->default('0');
             $table->timestamps();
         });
     }
