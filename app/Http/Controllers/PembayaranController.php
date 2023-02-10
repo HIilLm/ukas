@@ -54,7 +54,7 @@ class PembayaranController extends Controller
         $bayar = Pembayaran::create($validated);
         $siswa = User::where('kelas_id', $bayar["kelas_id"])->get();
         foreach ($siswa as $value) {
-            BayarMinggu::create(["pembayaran_id" => $bayar["id"], "kelas_id" => $bayar["kelas_id"], "user_id" => $value->id, "belum_byr" => $bayar['byr_perminggu'] * 5]);
+            BayarMinggu::create(["pembayaran_id" => $bayar["id"], "kelas_id" => $bayar["kelas_id"], "user_id" => $value->id]);
         }
         return redirect()->back();
     }
@@ -114,10 +114,20 @@ class PembayaranController extends Controller
     public function bayarminggu(Request $request)
     {
         $byr = BayarMinggu::find($request->id_pembayaran);
+        $byr_bln = Pembayaran::find($byr->pembayaran_id);
         $validated = $request->validate([
-            'bayar' => 'numeric|max:'.$byr->belum_byr
+            'bayar' => 'required|numeric|max:'.$byr_bln->byr_perminggu * 5 - $byr->terbayar
         ]);
-        $byr->update(['belum_byr' => $byr->belum_byr - $validated['bayar']]);
+        $sdh = floor(($byr->terbayar + $request['bayar'])/$byr_bln->byr_perminggu);
+        $kurang = ($byr->terbayar + $request['bayar'])%$byr_bln->byr_perminggu;
+        // dd($sdh);
+        for($x=1;$x<=$sdh;$x++){
+            $byr->update(['mng_'.$x => $byr_bln->byr_perminggu]);
+        }
+        if($kurang > 0){
+            $byr->update(['mng_'.($sdh + 1) => $kurang]);
+        }
+        $byr->update(['terbayar' => $byr->terbayar+$validated['bayar']]);
         return back();
     }
 }

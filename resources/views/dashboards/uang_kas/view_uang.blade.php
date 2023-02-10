@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
+<<<<<<< HEAD
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -23,24 +24,54 @@
                         </div>
                     @enderror
                     <input type="hidden" name="id_pembayaran" value="" id="minggu">
+=======
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ubah Minggu Ke-1 : Elang Pandi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+>>>>>>> 6f5ffe6ba86bdbfcb2850fcc6371023d34acdf3c
                 </div>
+                <div class="modal-body">
+                    <form action="{{ route('uangkas.minggu') }}" method="POST">
+
+                        @csrf
+                        <div class="mb-3">
+                            <label for="bayar" class="label-bayar form-label">Minggu Ke-1</label>
+                            <input type="number" min="1" max="" name="bayar"
+                                class="form-control @error('bayar') is-invalid @enderror" id="bayar"
+                                value="{{ old('bayar') }}" onchange="cek_byr()">
+                            @error('bayar')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <input type="hidden" name="id_pembayaran" value="" id="minggu">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
-        </form>
-        </div>
-      </div>
     </div>
-</div>
 
     <div class="page-content">
         <div class="main-wrapper">
             <div class="row">
                 <div class="card">
                     <div class="card-body">
+<<<<<<< HEAD
                         <h3>Detail Bulan Pembayaran : {{ $pembayaran->bulan->bulan }} {{ $pembayaran->tahun }} {{-- Bulan --}} </h3>
                         <h4 class="mb-3">Rp. {{ number_format($pembayaran->byr_perminggu) }} / minggu</h4>
+=======
+                        <h3>Detail Bulan Pembayaran : {{ $pembayaran->bulan->bulan }} {{ $pembayaran->tahun }}
+                            {{-- Bulan --}} </h3>
+                        <h4 class="mb-3">Rp. {{ $pembayaran->byr_perminggu }} / minggu</h4>
+>>>>>>> 6f5ffe6ba86bdbfcb2850fcc6371023d34acdf3c
                         {{-- <a href="" class="btn btn-primary mb-3 mt-2">Create</a> --}}
                         <table id="logo-table" class="display"
                             style="table-layout:fixed;
@@ -63,33 +94,43 @@
                                         <td>{{ $item->siswa->absen }}</td>
                                         <td class="data-name" data-id="{{ $item->id }}">{{ $item->siswa->name }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-{{ $item->belum_byr <= $pembayaran->byr_perminggu * 4? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-minggu="mng-1" {{ $item->belum_byr <= $pembayaran->byr_perminggu * 4? 'disabled': ''}}>
-                                                {{ $item->mng_1 }}
+                                            <button type="button"
+                                                class="btn btn-{{ $item->mng_1 == $pembayaran->byr_perminggu ? 'success' : 'primary' }} btn-action"
+                                                data-bs-toggle="modal" data-bs-target="#exampleModal" data-minggu="mng-1"
+                                                {{ $item->mng_1 == $pembayaran->byr_perminggu ? 'disabled' : '' }}>
+                                                {{ number_format($item->mng_1) }}
                                             </button>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-{{ $item->belum_byr <= $pembayaran->byr_perminggu * 3? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-minggu="mng-2" {{ $item->belum_byr <= $pembayaran->byr_perminggu * 3? 'disabled': ''}}>
-                                                {{ $item->mng_2 }}
+                                            <button type="button"
+                                                class="btn btn-{{ $item->mng_2 == $pembayaran->byr_perminggu ? 'success' : 'primary' }} btn-action"
+                                                data-bs-toggle="modal" data-bs-target="#exampleModal" data-minggu="mng-2"
+                                                {{ $item->mng_2 == $pembayaran->byr_perminggu ? 'disabled' : '' }}>
+                                                {{ number_format($item->mng_2) }}
                                             </button>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-{{ $item->belum_byr <= $pembayaran->byr_perminggu * 2? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-minggu="mng-3" {{ $item->belum_byr <= $pembayaran->byr_perminggu * 2? 'disabled': ''}}>
-                                                {{ $item->mng_3 }}
+                                            <button type="button"
+                                                class="btn btn-{{ $item->mng_3 == $pembayaran->byr_perminggu ? 'success' : 'primary' }} btn-action"
+                                                data-bs-toggle="modal" data-bs-target="#exampleModal" data-minggu="mng-3"
+                                                {{ $item->mng_3 == $pembayaran->byr_perminggu ? 'disabled' : '' }}>
+                                                {{ number_format($item->mng_3) }}
                                             </button>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-{{ $item->belum_byr <= $pembayaran->byr_perminggu? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-minggu="mng-4" {{ $item->belum_byr <= $pembayaran->byr_perminggu ? 'disabled': ''}}>
-                                                {{ $item->mng_4 }}
+                                            <button type="button"
+                                                class="btn btn-{{ $item->mng_4 == $pembayaran->byr_perminggu ? 'success' : 'primary' }} btn-action"
+                                                data-bs-toggle="modal" data-bs-target="#exampleModal" data-minggu="mng-4"
+                                                {{ $item->mng_4 == $pembayaran->byr_perminggu ? 'disabled' : '' }}>
+                                                {{ number_format($item->mng_4) }}
                                             </button>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-{{ $item->belum_byr == 0 * 4? 'success': 'primary' }} btn-action" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-minggu="mng-5" {{ $item->belum_byr == 0 ? 'disabled': ''}}>
-                                                {{ $item->mng_5 }}
+                                            <button type="button"
+                                                class="btn btn-{{ $item->mng_5 == $pembayaran->byr_perminggu ? 'success' : 'primary' }} btn-action"
+                                                data-bs-toggle="modal" data-bs-target="#exampleModal" data-minggu="mng-5"
+                                                {{ $item->mng_5 == $pembayaran->byr_perminggu ? 'disabled' : '' }}>
+                                                {{ number_format($item->mng_5) }}
                                             </button>
                                         </td>
 
@@ -121,16 +162,8 @@
     <script>
         $(document).ready(function() {
             var id;
-            $('.editable').each(function() {
-                id = $(this).attr('id');
-                if (id != '') {
-                    $('#' + id).summernote({
-                        height: 120,
-                    });
-                }
-            })
 
-            $('.btn-action').click(function(){
+            $('.btn-action').click(function() {
                 const minggu = $(this).data('minggu')
                 const el = $(`th.${minggu}`)
                 let text = $(el).text().split(' ')
@@ -143,10 +176,13 @@
                 // $('#bayar').attr('name', minggu);
                 $('#minggu').attr('value', id);
 
-        });
+            });
 
-        var table = $('#logo-table').DataTable({});
+            var table = $('#logo-table').DataTable({});
 
-    })
+        })
+        function cek_byr() {
+            console.log($(this).val());
+        }
     </script>
 @endsection
