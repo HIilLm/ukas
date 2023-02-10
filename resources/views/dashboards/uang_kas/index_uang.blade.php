@@ -114,7 +114,7 @@
                                     <br>
                                     Total Uang Kas Bulan Ini:
                                 <p class="btn btn-warning" style="cursor: default">
-                                    Rp. {{ $item->total }}
+                                    Rp. {{ number_format($item->total) }}
                                 </p>
                                 <br>
                                 <form id="form-delete{{ $item->id }}"

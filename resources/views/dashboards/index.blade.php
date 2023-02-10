@@ -75,7 +75,7 @@
                         <h5 class="card-title"><i data-feather="dollar-sign"></i> Uang Kas</h5>
                         <p>Jumlah Uang Kas</p>
                         <br>
-                        <h2>RP. 40000{{ $uangkas }}</h2>
+                        <h2>RP. {{ $uangkas }}</h2>
                     </div>
                 </div>
             </div>

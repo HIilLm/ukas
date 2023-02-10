@@ -120,7 +120,7 @@ class PembayaranController extends Controller
         ]);
         $sdh = floor(($byr->terbayar + $request['bayar'])/$byr_bln->byr_perminggu);
         $kurang = ($byr->terbayar + $request['bayar'])%$byr_bln->byr_perminggu;
-        dd($sdh);
+        // dd($sdh);
         for($x=1;$x<=$sdh;$x++){
             $byr->update(['mng_'.$x => $byr_bln->byr_perminggu]);
         }
@@ -128,7 +128,6 @@ class PembayaranController extends Controller
             $byr->update(['mng_'.($sdh + 1) => $kurang]);
         }
         $byr->update(['terbayar' => $byr->terbayar+$validated['bayar']]);
-        $byr_bln->update(['total' => $byr_bln->total + $request->bayar]);
         return back();
     }
 }
