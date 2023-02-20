@@ -19,7 +19,8 @@ class PembayaranController extends Controller
     {
         return view('dashboards.uang_kas.index_uang',[
             'page' => 'Uang Kas',
-            'pembayaran' => Pembayaran::where('kelas_id', auth()->user()->kelas_id)->get(),
+            'pembayaran' => Pembayaran::where('kelas_id', auth()->user()->kelas_id)->orderBy('tahun', 'ASC')
+            ->orderBy('bulan_id', 'ASC')->get(),
             'bulan' => Bulan::all()
         ]);
     }
@@ -67,12 +68,18 @@ class PembayaranController extends Controller
      */
     public function show($id)
     {
+        // bendahara
         $siswa = BayarMinggu::where('pembayaran_id', $id)->get();
+        // bendahara
+        //siswa
+        $siswashow = BayarMinggu::where('pembayaran_id', $id)->where('user_id', auth()->user()->id)->get();
+        //siswa
         $pembayaran = Pembayaran::find($id);
         return view('dashboards.uang_kas.view_uang', [
             'page' => 'Uang Kas',
             'pembayaran' => $pembayaran,
-            'siswa'=> $siswa
+            'siswa'=> $siswa,
+            'siswashow' => $siswashow
         ]);
     }
 
@@ -120,7 +127,6 @@ class PembayaranController extends Controller
         ]);
         $sdh = floor(($byr->terbayar + $request['bayar'])/$byr_bln->byr_perminggu);
         $kurang = ($byr->terbayar + $request['bayar'])%$byr_bln->byr_perminggu;
-        // dd($sdh);
         for($x=1;$x<=$sdh;$x++){
             $byr->update(['mng_'.$x => $byr_bln->byr_perminggu]);
         }
@@ -128,6 +134,7 @@ class PembayaranController extends Controller
             $byr->update(['mng_'.($sdh + 1) => $kurang]);
         }
         $byr->update(['terbayar' => $byr->terbayar+$validated['bayar']]);
+        $byr_bln->update(['total' => $byr_bln->total + $validated['bayar']]);
         return back();
     }
 }

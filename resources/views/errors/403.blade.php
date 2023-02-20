@@ -4,7 +4,7 @@
 <div class="error-container">
     <div class="error-info">
         <h1>403</h1>
-        <p>Sorry your acces is denied.<br>go to the <a
+        <p>Sorry your acces is denied.<br>go to <a
                 href="/">dashboard</a>.</p>
     </div>
     <div class="error-image"></div>

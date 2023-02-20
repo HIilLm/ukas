@@ -18,7 +18,7 @@
                                     <label for="pengeluaran" class="form-label">Jumlah Pengeluaran</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Rp.</span>
-                                        <input type="number" min="1000" name="pengeluaran"
+                                        <input type="number" min="500" step="500" name="pengeluaran"
                                             class="form-control @error('pengeluaran') is-invalid @enderror"
                                             aria-label="Amount (to the nearest dollar)" id="pengeluaran"
                                             value="{{ old('pengeluaran') }}">
@@ -81,17 +81,16 @@
                 <div class="modal-body">
                     <form id="update" method="POST">
                         @csrf
-                        @method("put")
+                        @method('put')
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="pengeluaran" class="form-label">Jumlah Pengeluaran</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Rp.</span>
-                                        <input type="number" min="1000" name="pengeluaran" class="form-control"
+                                        <input type="number"min="500" step="500" name="pengeluaran" class="form-control"
                                             aria-label="Amount (to the nearest dollar)"
-                                            @error('pengeluaran') is-invalid @enderror" id="edit_pengeluaran"
-                                            >
+                                            @error('pengeluaran') is-invalid @enderror" id="edit_pengeluaran">
                                         @error('pengeluaran')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -105,8 +104,7 @@
                                     <label for="tanggal" class="form-label">Tanggal Pengeluaran</label>
                                     <div class="input-group mb-3">
                                         <input type="date" name="tanggal" class="form-control"
-                                            @error('tanggal') is-invalid @enderror" id="edit_tanggal"
-                                            >
+                                            @error('tanggal') is-invalid @enderror" id="edit_tanggal">
                                         {{-- <span class="input-group-text">.00</span> --}}
                                         @error('tanggal')
                                             <div class="invalid-feedback">
@@ -154,8 +152,8 @@
                     <div class="card-body">
                         <h5 class="card-title">Pengeluaran Kelas {{ auth()->user()->kelas->nama_kelas }}</h5>
                         @can('bendahara')
-                        <a href="" class="btn btn-primary mb-3" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">Tambah Pengeluaran</a> {{-- Berupa modal --}}
+                            <a href="" class="btn btn-primary mb-3" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">Tambah Pengeluaran</a> {{-- Berupa modal --}}
                         @endcan
                         <table id="logo-table" class="display"
                             style="table-layout:fixed;
@@ -167,7 +165,9 @@
                                     <th>Keterangan</th>
                                     <th>Tanggal Pengeluaran</th>
                                     <th>Jumlah Pengeluaran</th>
-                                    <th>option</th>
+                                    @can('bendahara')
+                                        <th>option</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody id="images">
@@ -181,37 +181,39 @@
                                         </td>
                                         <td>{{ $item->keterangan }}</td>
                                         <td>
-                                            {{ date('d F Y', strtotime($item->tanggal)) }}
+                                            {{ date('d-M-Y', strtotime($item->tanggal)) }}
                                         </td>
                                         <td>
-                                            Rp. {{ $item->pengeluaran }}
+                                            Rp. {{ number_format($item->pengeluaran) }}
                                         </td>
-                                        <td style="">
-                                            <div class="dropdown dropright">
-                                                <button class="btn btn-secondary" type="button" id="dropdownMenuButton"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </button>
-                                                <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
-                                                    <li><a class="dropdown-item text-dark" style="cursor: pointer"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModal2" onclick="sendData({{ $item }})">Edit</a>
-                                                    </li>
-                                                    <li>
-                                                        <form id="form-delete{{ $item->id }}"
-                                                            action="{{ route('pengeluaran.destroy', ["pengeluaran" => $item->id]) }}"
-                                                            method="post" style="display: none">
-                                                            @method("delete")
-                                                            @csrf
-                                                        </form>
-                                                        <a class="dropdown-item text-dark" style="cursor: pointer"
-                                                             onclick="what({{ $item->id }})" >
-                                                            Delete
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
+                                        @can('bendahara')
+                                            <td style="">
+                                                <div class="dropdown dropright">
+                                                    <button class="btn btn-secondary" type="button" id="dropdownMenuButton"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
+                                                        <li><a class="dropdown-item text-dark" style="cursor: pointer"
+                                                                data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                                                                onclick="sendData({{ $item }})">Edit</a>
+                                                        </li>
+                                                        <li>
+                                                            <form id="form-delete{{ $item->id }}"
+                                                                action="{{ route('pengeluaran.destroy', ['pengeluaran' => $item->id]) }}"
+                                                                method="post" style="display: none">
+                                                                @method('delete')
+                                                                @csrf
+                                                            </form>
+                                                            <a class="dropdown-item text-dark" style="cursor: pointer"
+                                                                onclick="what({{ $item->id }})">
+                                                                Delete
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        @endcan
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -222,7 +224,9 @@
                                     <th>Keterangan</th>
                                     <th>Tanggal Pengeluaran</th>
                                     <th>Jumlah Pengeluaran</th>
-                                    <th>option</th>
+                                    @can('bendahara')
+                                        <th>option</th>
+                                    @endcan
                                 </tr>
                             </tfoot>
                         </table>

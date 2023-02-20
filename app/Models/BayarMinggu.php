@@ -19,6 +19,6 @@ class BayarMinggu extends Model
      }
      public function pembayaran()
      {
-        return $this->belongsTo(Pembayaran::class,'user_id','id');
+        return $this->belongsTo(Pembayaran::class,'pembayaran_id','id');
      }
 }

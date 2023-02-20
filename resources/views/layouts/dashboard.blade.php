@@ -53,11 +53,11 @@
 </head>
 
 <body>
-    {{-- <div class='loader'>
+    <div class='loader'>
         <div class='spinner-grow text-primary' role='status'>
             <span class='sr-only'>Loading...</span>
         </div>
-    </div> --}}
+    </div>
 
     <div class="page-container">
         {{-- PAGE HEADER --}}
@@ -123,13 +123,13 @@
                 }
             })
         }
-        function image() {
-            const viewer = new Viewer(document.getElementById('images'), {
-                viewed() {
-                    viewer.zoomTo(1);
-                },
-            });
-        }
+        // function image() {
+        //     const viewer = new Viewer(document.getElementById('images'), {
+        //         viewed() {
+        //             viewer.zoomTo(1);
+        //         },
+        //     });
+        // }
         function out() {
             Swal.fire({
                 title: 'Are you sure?',

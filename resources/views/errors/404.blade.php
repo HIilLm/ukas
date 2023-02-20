@@ -4,7 +4,7 @@
 <div class="error-container">
     <div class="error-info">
         <h1>404</h1>
-        <p>It seems that the page you are looking for no longer exists.<br>go to the <a
+        <p>It seems that the page you are looking for no longer exists.<br>go to <a
                 href="/">dashboard</a>.</p>
     </div>
     <div class="error-image"></div>

@@ -41,7 +41,7 @@ class HomepageController extends Controller
 
         if(Hash::check($request->old_pass , auth()->user()->password)){
             User::find(auth()->user()->id)->update(["password" => bcrypt($request->password)]);
-            return back();
+            return back()->with(['success' => 'Password Has Been Changed']);
         }
 
         throw ValidationException::withMessages([

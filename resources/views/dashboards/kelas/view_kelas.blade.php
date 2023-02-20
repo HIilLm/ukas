@@ -100,7 +100,6 @@
         </div>
     </div>
     {{-- MODAL TAMBAH --}}
-    {{-- @dd($siswa->where('role_id', 2)->first()->id) --}}
     {{-- MODAL EDIT --}}
     <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -205,10 +204,12 @@
                         <h5 class="card-title">Detail Kelas {{ $kelas->nama_kelas }}</h5>
                         <div class="row">
                             <div class="col">
+                                @can('admin')
                                 <a href="#" class="btn btn-primary mb-3 me-2" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">Tambah Siswa</a> {{-- Berupa modal --}}
-                                <a href="" class="btn btn-danger mb-3"><i data-feather="file-text"></i> <span
-                                        style="font-size: 14px; font-weight:400">Export</span></a> {{-- ONLY ADMIN --}}
+                                @endcan
+                                <a href="{{ route('kelas.export', $kelas->id) }}" class="btn btn-success mb-3"><i data-feather="file-text"></i> <span
+                                        style="font-size: 14px; font-weight:400">Export</span></a>
                             </div>
                         </div>
                         <table id="logo-table" class="display"
@@ -221,8 +222,8 @@
                                     <th>NISN</th>
                                     @can('admin')
                                     <th>Bendahara</th> {{-- Admin Akses --}}
-                                    @endcan
                                     <th>option</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody id="images">
@@ -251,8 +252,7 @@
                                                         onclick="checking({{ $item->id }})">
                                                 </div>
                                             </td>
-                                        @endcan
-                                        {{-- ADMIN ACCESS --}}
+                                            {{-- ADMIN ACCESS --}}
 
                                         <td style="">
                                             <div class="dropdown dropright">
@@ -280,6 +280,7 @@
                                                 </ul>
                                             </div>
                                         </td>
+                                        @endcan
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -290,8 +291,8 @@
                                     <th>Nisn</th>
                                     @can('admin')
                                     <th>Bendahara</th> {{-- Admin Akses --}}
-                                    @endcan
                                     <th>option</th>
+                                    @endcan
                                 </tr>
                             </tfoot>
                         </table>

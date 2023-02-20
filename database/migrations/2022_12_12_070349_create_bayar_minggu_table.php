@@ -27,11 +27,7 @@ class CreateBayarMingguTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
-<<<<<<< HEAD
-            $table->bigInteger('belum_byr')->unsigned();
-=======
             $table->integer('terbayar')->default('0')->unsigned();
->>>>>>> 6f5ffe6ba86bdbfcb2850fcc6371023d34acdf3c
             $table->integer('mng_1')->default('0');
             $table->integer('mng_2')->default('0');
             $table->integer('mng_3')->default('0');

@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Kelas;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Hash;
-use PhpParser\Node\Stmt\Return_;
+use App\Http\Controllers\Controller;
+use App\Exports\UserExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KelasController extends Controller
 {
@@ -46,7 +46,7 @@ class KelasController extends Controller
             "nama_kelas" => "required"
         ]);
         Kelas::create($validated);
-        return redirect()->back();
+        return back();
     }
 
     /**
@@ -81,7 +81,7 @@ class KelasController extends Controller
             "nama_kelas" => "required"
         ]);
         Kelas::find($id)->update($validated);
-        return redirect()->back();
+        return back();
     }
 
     /**
@@ -104,13 +104,12 @@ class KelasController extends Controller
      */
     public function destroy($id)
     {
-        Kelas::find($id)->delete();
-        return redirect()->back();
+        Kelas::destroy($id);
+        return back();
     }
 
     public function tambah_siswa(Request $request)
     {
-        // dd($request->nisn);
         $message = [
             'required' => ':attribute mohon diisi terlebih dahulu',
             'email' => ':attribute mohon massukan format email yang benar, contoh = email@email.email',
@@ -129,17 +128,11 @@ class KelasController extends Controller
         $validated["role_id"] = 3;
 
         User::create($validated);
-        // foreach (User::where("kelas_id", $siswa->kelas_id) as $sis) {
-        //     if ($sis->absen >= $siswa->absen) {
-        //         User::find($sis->id)->update(["absen" => $sis->absen + 1]);
-        //     }
-        // }
-        return redirect()->back();
+        return back();
     }
 
     public function perbarui_siswa(Request $request,$id)
     {
-        // dd($request);
         $message = [
             'required' => ':attribute mohon diisi terlebih dahulu',
             'email' => ':attribute mohon massukan format email yang benar, contoh = email@email.email',
@@ -151,6 +144,7 @@ class KelasController extends Controller
             $validated = $request->validate([
                 "name" => "required",
                 "email" => "required",
+                "nisn" => "digits_between:6,12|numeric|required",
                 "absen" => "required|numeric"
             ], $message);
         } else {
@@ -160,32 +154,35 @@ class KelasController extends Controller
                 "nisn" => "digits_between:6,12|numeric|unique:users|required",
                 "absen" => "required|numeric"
             ], $message);
-            $validated["password"] = bcrypt($request->nisn);
+            // $validated["password"] = bcrypt($request->nisn);
         }
 
+        if ($request->email == User::find($id)->email) {
+            $validated = $request->validate([
+                "name" => "required",
+                "email" => "required",
+                "nisn" => "digits_between:6,12|numeric|required",
+                "absen" => "required|numeric"
+            ], $message);
+        } else {
+            $validated = $request->validate([
+                "name" => "required",
+                "email" => "required|unique:users", 
+                "nisn" => "digits_between:6,12|numeric|required",
+                "absen" => "required|numeric"
+            ], $message);
+            // $validated["password"] = bcrypt($request->nisn);
+           }
+
+
         User::find($id)->update($validated);
-        // $siswa = User::find($id);
-        // // dd($siswa);
-        // foreach (User::where("kelas_id", $siswa->kelas_id)->get() as $sis) {
-        //     // dd($sis);
-        //     if ($sis->absen >= $siswa->absen) {
-        //         User::find($sis->id)->update(["absen" => $sis->absen + 1]);
-        //     }
-        // }
-        // dd(User::where("kelas_id", $siswa->kelas_id)->get());
-        return redirect()->back();
+        return back();
     }
 
     public function hapus_siswa($id)
     {
-        $siswa = User::find($id);
-        // foreach (User::where("kelas_id", $siswa->kelas_id) as $sis) {
-        //     if ($sis->absen > $siswa->absen) {
-        //         User::find($sis->id)->update(["absen" => $sis->absen - 1]);
-        //     }
-        // }
-        $siswa->delete();
-        return redirect()->back();
+        User::destroy($id);
+        return back();
     }
 
     public function bendahara(Request $request)
@@ -201,8 +198,14 @@ class KelasController extends Controller
             foreach ($bendahara as $key => $value) {
                 array_push($total,$value->id);
             }
-
         }
         return response()->json($total);
+    }
+
+    public function SiswaExport($kelas)
+    {
+        $nama_file = Kelas::find($kelas)->nama_kelas;
+        $nama_file = strtolower(preg_replace('/\s+/', '_', $nama_file));
+        return Excel::download(new UserExport($kelas), $nama_file . time().'.xlsx');
     }
 }

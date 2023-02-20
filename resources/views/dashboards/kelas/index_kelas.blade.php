@@ -74,8 +74,10 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">KELAS</h5>
-                        <a href="" class="btn btn-primary mb-3" data-bs-toggle="modal"
-                            data-bs-target="#exampleModalCenter">Create</a>
+                        @can('admin')
+                            <a href="" class="btn btn-primary mb-3" data-bs-toggle="modal"
+                                data-bs-target="#exampleModalCenter">Create</a>
+                        @endcan
                         <table id="logo-table" class="display"
                             style="table-layout:fixed;
                             width:100%;">
@@ -83,7 +85,9 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Kelas</th>
-                                    <th>option</th>
+                                    @can('admin')
+                                        <th>option</th>
+                                    @endcan
                                 </tr>
                             </thead>
                             <tbody id="images">
@@ -91,36 +95,39 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->nama_kelas }}</td>
-                                        <td style="">
-                                            <div class="dropdown dropright">
-                                                <button class="btn btn-secondary" type="button" id="dropdownMenuButton"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </button>
-                                                <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
-                                                    <li><a href="{{ route('kelas.show', ['kela' => $item->id]) }}"
-                                                            class="dropdown-item text-dark">View</a>
-                                                    <li>
-                                                        <a class="dropdown-item text-dark" data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModalCenter1"
-                                                            onclick="sendData({{ $item }})"
-                                                            style="cursor: pointer">Edit</a>
-                                                    </li>
-                                                    <li>
-                                                        <form id="form-delete{{ $item->id }}"
-                                                            action="{{ route('kelas.destroy', ['kela' => $item->id]) }}"
-                                                            method="post" style="display: none">
-                                                            @csrf
-                                                            @method('delete')
-                                                        </form>
-                                                        <a class="dropdown-item text-dark" style="cursor: pointer"
-                                                            onclick="what({{ $item->id }})">
-                                                            Delete
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
+                                        @can('admin')
+                                            <td style="">
+                                                <div class="dropdown dropright">
+                                                    <button class="btn btn-secondary" type="button" id="dropdownMenuButton"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
+                                                        <li><a href="{{ route('kelas.show', ['kela' => $item->id]) }}"
+                                                                class="dropdown-item text-dark">View</a>
+                                                        <li>
+                                                            <a class="dropdown-item text-dark" data-bs-toggle="modal"
+                                                                data-bs-target="#exampleModalCenter1"
+                                                                onclick="sendData({{ $item }})"
+                                                                style="cursor: pointer">Edit</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <form id="form-delete{{ $item->id }}"
+                                                                action="{{ route('kelas.destroy', ['kela' => $item->id]) }}"
+                                                                method="post" style="display: none">
+                                                                @csrf
+                                                                @method('delete')
+                                                            </form>
+                                                            <a class="dropdown-item text-dark" style="cursor: pointer"
+                                                                onclick="what({{ $item->id }})">
+                                                                Delete
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        @endcan
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -128,7 +135,9 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Kelas</th>
-                                    <th>option</th>
+                                    @can('admin')
+                                        <th>option</th>
+                                    @endcan
                                 </tr>
                             </tfoot>
                         </table>

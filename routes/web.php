@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\UangController;
 use App\Http\Controllers\PembayaranController;
@@ -21,90 +22,43 @@ use App\Models\Pengeluaran;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
-
 Route::middleware(['guest'])->group(function () {
 Route::get('/login',[AuthController::class, "login"])->middleware('guest')->name("login");
 Route::post('/login',[AuthController::class, "authenticate"])->middleware('guest')->name("authenticate");
 });
 
-// Route::get('/admin/kelas',function()
-// {
-//     return view('dashboards.kelas.index_kelas',[
-//         'page' => 'Kelas'
-//     ]);
-// });
-
-// Route::get('/bendahara/kelas',function()
-// {
-//     return view('dashboards.kelas.indexb_kelas',[
-//         'page' => 'Kelas Bendahara'
-//     ]);
-// });
-
-
-Route::get('/bendahara',function()
-{
-    return view('dashboards.indexb',[
-        'page' => 'Dashboard'
-    ]);
-});
-
-Route::get('/detail/kelas',function()
-{
-    return view('dashboards.kelas.view_kelas',[
-        'page' => 'Kelas'
-    ]);
-});
-
-Route::get('/detail/bulan',function()
-{
-    return view('dashboards.uang_kas.view_uang',[
-        'page' => 'Uang Kas'
-    ]);
-});
-
-Route::get('/admin',function()
-{
-    return view('dashboards.indexa',[
-        'page' => 'Dashboard'
-    ]);
-});
-
-Route::resource('/uangkas', UangController::class);
-
-Route::get('/laporan',function()
-{
-    return view('dashboards.laporan',[
-        'page' => 'Laporan'
-    ]);
-});
-
 Route::middleware(['auth'])->group(function () {
-
     Route::post('/changepass', [HomepageController::class, 'ChangePass'])->name("change.password");
     Route::get('/', [HomepageController::class, 'dashboard'])->name("dashboard.index");
     Route::post('/',[AuthController::class, "logout"])->name("logout");
+});
 
-    // ROUTE PENGELUARAN
-    Route::resource('/pengeluaran', PengeluaranController::class);
-    // ROUTE PENGELUARAN
+Route::middleware(['bendsiswa'])->group(function () {
+// ROUTE PENGELUARAN
+Route::resource('/pengeluaran', PengeluaranController::class);
+
+//route pembayaran
+Route::resource('/uangkas', PembayaranController::class);
+Route::post('/ukas/bayar', [PembayaranController::class, 'bayarminggu'])->name("uangkas.minggu");
+});
+
+Route::middleware(['bendahara'])->group(function () {
+    //route laporan
+    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+    Route::get('/laporan/show/{id}', [LaporanController::class, 'show'])->name("laporan.show");
+    Route::get('/laporan/pengeluaran/{time1}/{time2}/{kelas}', [LaporanController::class, 'show_pengeluaran'])->name("laporan.showp");
+    Route::get('/exportpemasukan/{id}', [LaporanController::class, "pemasukan_export"])->name('pemasukan.export');
+    Route::get('/exportpengeluaran/{time1}/{time2}/{kelas}', [LaporanController::class, "pengeluaran_export"])->name('pengeluaran.export');
+});
 
 
-    //route kelas
-    Route::resource('/kelas', KelasController::class);
-    Route::post('kelas/createsiswa', [KelasController::class, "tambah_siswa"])->name("siswa.create");
-    Route::put('kelas/perbaruis/{id}', [KelasController::class, "perbarui_siswa"])->name("siswa.update");
-    Route::put('/kelas/perbarui/{id}', [KelasController::class, "perbarui"]);
-    Route::post('/kelas/bendahara', [KelasController::class, "bendahara"]);
-    Route::delete('/kelas/siswa/{id}', [KelasController::class, "hapus_siswa"])->name("siswa.delete");
-
-    //route pembayaran
-    Route::resource('/uangkas', PembayaranController::class);
-    Route::post('/ukas/bayar', [PembayaranController::class, 'bayarminggu'])->name("uangkas.minggu");
-    // Route::post('/uangkas/{id}/bayar', [PembayaranController::class, "bayar_minggu"])->name("uangkas.minggu");
+Route::middleware(['bendamin'])->group(function () {
+   //route kelas
+   Route::resource('/kelas', KelasController::class);
+   Route::post('kelas/createsiswa', [KelasController::class, "tambah_siswa"])->name("siswa.create");
+   Route::put('kelas/perbaruis/{id}', [KelasController::class, "perbarui_siswa"])->name("siswa.update");
+   Route::put('/kelas/perbarui/{id}', [KelasController::class, "perbarui"]);
+   Route::post('/kelas/bendahara', [KelasController::class, "bendahara"]);
+   Route::delete('/kelas/siswa/{id}', [KelasController::class, "hapus_siswa"])->name("siswa.delete");
+   Route::get('/exportkelas/{id}', [KelasController::class, "SiswaExport"])->name('kelas.export');
 });
